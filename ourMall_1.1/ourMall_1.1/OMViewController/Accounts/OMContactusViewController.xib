@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OMContactusViewController">
+            <connections>
+                <outlet property="contactFBBtn" destination="Evd-dN-Zhn" id="Rnp-Bl-1iK"/>
+                <outlet property="contactIGBtn" destination="1DD-Ev-yGM" id="toM-aI-e0o"/>
+                <outlet property="contactTWBtn" destination="uav-6R-UUW" id="5xs-N4-Q0Q"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="contactBgImg.jpg" id="gF2-33-4NE">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="215"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downDir.png" id="UzS-vV-C9G">
+                    <rect key="frame" x="152" y="190" width="16" height="5"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Problems? Feedback?just LOVE OURMALL?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LLR-hE-yG3">
+                    <rect key="frame" x="72" y="138" width="176" height="42"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.92156862750000001" green="0.27058823529999998" blue="0.098039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logox120.png" id="enw-9E-MnR">
+                    <rect key="frame" x="120" y="45" width="80" height="80"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Evd-dN-Zhn">
+                    <rect key="frame" x="55" y="218" width="210" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="facebook-buton.png"/>
+                    <connections>
+                        <action selector="contactFacrbookAction:" destination="-1" eventType="touchUpInside" id="jeF-95-Imw"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uav-6R-UUW">
+                    <rect key="frame" x="55" y="278" width="210" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="twitter-button.png"/>
+                    <connections>
+                        <action selector="contactTwitterAction:" destination="-1" eventType="touchUpInside" id="EHk-Z0-NOG"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1DD-Ev-yGM">
+                    <rect key="frame" x="55" y="338" width="210" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="Instagram.png"/>
+                    <connections>
+                        <action selector="contactInstagramAction:" destination="-1" eventType="touchUpInside" id="6Q8-8s-Yk9"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <point key="canvasLocation" x="359" y="284"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Instagram.png" width="210" height="40"/>
+        <image name="contactBgImg.jpg" width="750" height="500"/>
+        <image name="downDir.png" width="16" height="5"/>
+        <image name="facebook-buton.png" width="210" height="40"/>
+        <image name="logox120.png" width="63" height="63"/>
+        <image name="twitter-button.png" width="210" height="40"/>
+    </resources>
+</document>
