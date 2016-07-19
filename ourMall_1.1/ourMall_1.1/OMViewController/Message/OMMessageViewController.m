@@ -48,11 +48,6 @@
     myWebSocket.delegate = self;
     [self openWebSocketConnection];
     
-    // add loading
-    self.hud = [[MBProgressHUD alloc] init];
-    [self.view addSubview:self.hud];
-    [self.hud hide:YES];
-    
     [self requireData];
     
     // show center loading animation
@@ -92,7 +87,7 @@
     NSString *cachePath = [sandBoxPath stringByAppendingString:@"/OMMessageListCache.plist"];
     NSArray *cacheArray = [NSKeyedUnarchiver unarchiveObjectWithFile:cachePath];
     
-    if (cacheArray.count > 0) {
+    if (cacheArray && cacheArray.count > 0) {
         
         for (OMFriendListModel *model in cacheArray) {
             [self.friendArray addObject:model];
@@ -115,16 +110,20 @@
         }
         
         [self.tableViewMessage reloadData];
-        [self.hud hide:YES];
     }
     else{
-        [self.hud show:YES];
+        // add loading
+        self.hud = [[MBProgressHUD alloc] init];
+        [self.view addSubview:self.hud];
+        [self.hud hide:YES];
         
         self.friendArray = [NSMutableArray array];
     }
 }
 
 - (void)requireNewData{
+    
+    [self.hud show:YES];
     
     if (![OMCustomTool isNullObject:[SETTINGs objectForKey:OM_USER_LOGINKEY]]) {
         

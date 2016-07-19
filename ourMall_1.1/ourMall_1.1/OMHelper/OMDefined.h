@@ -153,6 +153,30 @@
 #define API_DELETE_JPUSH_RION [NSString stringWithFormat:@"api.mall.member.deletedevice"]
 
 
+#pragma mark - SHOP PART API
+// 20
+#pragma mark - OMAPI: Reds Shop Orders List
+#define API_SHOP_ORDERS_LIST [NSString stringWithFormat:@"api.mall.shop.orderlist"]
+
+// 21
+#pragma mark - OMAPI: Reds Shop Products List
+#define API_SHOP_PRODUCT_LIST [NSString stringWithFormat:@"api.mall.shop.sponsorproductfind"]
+
+// 22
+#pragma mark - OMAPI:  Reds Shop Product Categories List
+#define API_SHOP_PRODUCT_CATEGORIES_LIST [NSString stringWithFormat:@"api.mall.shop.categorylist"]
+
+//// 23
+//#pragma mark - OMAPI: Send JPush Rigister Informations
+//#define API_SEND_JPUSH_RION [NSString stringWithFormat:@"api.mall.member.registdevice"]
+//
+//// 24
+//#pragma mark - OMAPI: Send JPush Rigister Informations
+//#define API_SEND_JPUSH_RION [NSString stringWithFormat:@"api.mall.member.registdevice"]
+//
+//// 25
+//#pragma mark - OMAPI: Send JPush Rigister Informations
+//#define API_SEND_JPUSH_RION [NSString stringWithFormat:@"api.mall.member.registdevice"]
 
 #pragma mark - OMAPI: API Parameters Keys
 

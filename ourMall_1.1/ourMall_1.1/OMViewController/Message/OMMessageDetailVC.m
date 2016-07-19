@@ -547,7 +547,7 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
     
-    CGSize size = [self stringHeightWithMaxWidth:SCREEN_WIDTH - 100 andFont:[UIFont systemFontOfSize:14.0] fromText:textView.text];
+//    CGSize size = [self stringHeightWithMaxWidth:SCREEN_WIDTH - 100 andFont:[UIFont systemFontOfSize:14.0] fromText:textView.text];
     
 //    self.progressAty.center = CGPointMake(SCREEN_WIDTH - size.width - 50 - 65, 33);
 }

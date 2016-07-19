@@ -22,6 +22,7 @@
     [OMCustomTool setcornerOfView:self.operationBtn withRadius:5 color:ClearBackGroundColor];
     
     self.platformFlagImg.hidden = YES;
+    
     // set cell unenable click
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 

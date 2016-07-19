@@ -131,7 +131,7 @@
 #pragma mark - Load Header View
 - (void)loadFooterView{
     
-    [self.webViewDetail loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.ourmall.com/index.php?m=content&a=view&id=%@", self.taskId]]]];
+    [self.webViewDetail loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.ourmall.com/index.php?m=content&a=view&id=%@&isApp=1", self.taskId]]]];
     
     self.tableViewDetail.tableFooterView = self.webViewDetail;
 }

@@ -18,6 +18,7 @@
 #import "OMAccountsViewController.h"
 #import "OMVisitorViewController.h"
 #import "OMLoginViewController.h"
+#import "OMShopViewController.h"
 
 // JPush
 #import <JPUSHService.h>
@@ -30,6 +31,7 @@
 @property(nonatomic, strong) OMCustomNavigation *myCartNavi;
 @property(nonatomic, strong) OMCustomNavigation *accountsNavi;
 @property(nonatomic, strong) OMCustomNavigation *visitorNavi;
+@property(nonatomic, strong) OMCustomNavigation *shopNavi;
 
 @property(nonatomic, assign) NSUInteger bageNumber;
 
@@ -71,11 +73,16 @@
         OMMyCartViewController *myCartVC = [[OMMyCartViewController alloc] init];
         myCartVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Task" image:[self makeOriginalImage:@"Note.png"] selectedImage:[self makeOriginalImage:@"Note-hover.png"]];
         
+        OMShopViewController *shopVC = [[OMShopViewController alloc] init];
+        shopVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Shop" image:[self makeOriginalImage:@"shop.png"] selectedImage:[self makeOriginalImage:@"shop-hover.png"]];
+        
         OMAccountsViewController *accountsVC = [[OMAccountsViewController alloc] init];
         accountsVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Account" image:[self makeOriginalImage:@"Male-User.png"] selectedImage:[self makeOriginalImage:@"Male-User-hover.png"]];
         
         OMVisitorViewController *visitorVC = [[OMVisitorViewController alloc] init];
         visitorVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Account" image:[self makeOriginalImage:@"Male-User.png"] selectedImage:[self makeOriginalImage:@"Male-User-hover.png"]];
+        
+        
         
         // align center
         homeVC.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -83,6 +90,7 @@
         myCartVC.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
         accountsVC.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
         visitorVC.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+        shopVC.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, 0, 0);
         
         // navigation
         self.homeNavi = [[OMCustomNavigation alloc] initWithRootViewController:homeVC];
@@ -90,6 +98,7 @@
         self.myCartNavi = [[OMCustomNavigation alloc] initWithRootViewController:myCartVC];
         self.accountsNavi = [[OMCustomNavigation alloc] initWithRootViewController:accountsVC];
         self.visitorNavi = [[OMCustomNavigation alloc] initWithRootViewController:visitorVC];
+        self.shopNavi = [[OMCustomNavigation alloc] initWithRootViewController:shopVC];
         
         // bagenumber initialize
         _bageNumber = 0;
@@ -118,23 +127,27 @@
 
 // Login Status UI
 - (void)loginStatus{
-    // message
-#if 1
+    
+    // without shop
+#if 0
     
     NSArray *tabs = @[self.homeNavi, self.messageNavi, self.myCartNavi, self.accountsNavi];
     self.viewControllers = [tabs copy];
     
 #endif
-    // no message
-#if 0
     
-    NSArray *tabs = @[self.homeNavi, self.myCartNavi, self.accountsNavi];
+    // with shop
+#if 1
+    
+    NSArray *tabs = @[self.homeNavi, self.messageNavi, self.myCartNavi, self.shopNavi, self.accountsNavi];
     self.viewControllers = [tabs copy];
     
 #endif
+    
 }
 
 - (void)logoutStatus{
+    
   // message
 #if 1
     
@@ -143,13 +156,7 @@
 
 #endif
     
-  // no message
-#if 0
-    
-    NSArray *tabs = @[self.homeNavi, self.myCartNavi, self.visitorNavi];
-    self.viewControllers = [tabs copy];
-    
-#endif
+
 }
 
 - (void)viewDidLoad {
@@ -217,20 +224,6 @@
     }
     else if (index == 3)
     {
-        return YES;
-    }
-    else{
-        return YES;
-    }
-#endif
-    
-    // no message
-#if 0
-    
-    // limit the authority of visiting each tabbar （add login verification）
-    NSInteger index = [self.viewControllers indexOfObject:viewController];
-    if (index == 1) {
-        
         if (![OMCustomTool UserIsLoggingIn]) {
             OMLoginViewController *loginVC = [[OMLoginViewController alloc] init];
             [self presentViewController:loginVC animated:YES completion:^{
@@ -242,15 +235,13 @@
             return YES;
         }
     }
-    
-    else if (index == 2)
+    else if (index == 4)
     {
         return YES;
     }
     else{
         return YES;
     }
-    
 #endif
     
 }
@@ -262,7 +253,7 @@
     tabFrame.size.height = 50;
     tabFrame.origin.y = self.view.frame.size.height - 50;
     self.tabBar.frame = tabFrame;
-    
+
 }
 
 

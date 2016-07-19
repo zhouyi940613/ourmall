@@ -439,7 +439,7 @@
         
         [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramFBContent API:API_S_GET_SHARECONTENT dateBlock:^(id dateBlock) {
             // get ULR willing to share
-            NSString *contentUrl = dateBlock[@"Data"][@"ShareContent"][@"contentUrl"];
+//            NSString *contentUrl = dateBlock[@"Data"][@"ShareContent"][@"contentUrl"];
             
             // prepare parameters of return status
             NSDictionary *paramFB = @{@"id": [SETTINGs objectForKey:OM_USER_ID],
