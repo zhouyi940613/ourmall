@@ -106,11 +106,21 @@
                                };
     
     [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_S_APPLY_WITHDRAW dateBlock:^(id dateBlock) {
-        [OMCustomTool OMshowAlertViewWithMessage:@"Withdraw succeed!" fromViewController:self];
-        [self loadData];
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Withdraw succeed!" message:nil preferredStyle:1];
+        
+        UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+        [alert addAction:alertAction];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+        
     }];
 
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

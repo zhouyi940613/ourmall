@@ -10,10 +10,7 @@
 #import <SRWebSocket.h>
 #import "OMFriendListModel.h"
 
-@interface OMMessageDetailVC : BaseViewController<UITableViewDataSource, UITableViewDelegate, SRWebSocketDelegate>
-{
-    SRWebSocket *myWebSocket;
-}
+@interface OMMessageDetailVC : BaseViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic, strong) OMFriendListModel *model;
 

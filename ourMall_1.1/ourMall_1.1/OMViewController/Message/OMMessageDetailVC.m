@@ -42,30 +42,83 @@
     self.title = @"Chat Message";
     [self loadUI];
     
-    myWebSocket.delegate = nil;
-    [myWebSocket close];
+
+    [self sendForRequestInitailizeList];
     
-    myWebSocket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"ws://message.ourmall.com:7272"]]];
-    myWebSocket.delegate = self;
-    [self openWebSocketConnection];
+    [NOTIFICATION_SETTING addObserver:self selector:@selector(loadDataFromNotice:) name:OMWEBSOCKET_SESSIONDETAIL object:nil];
     
-    self.hud = [[MBProgressHUD alloc] init];
-    [self.view addSubview:self.hud];
-    [self.hud show:YES];
+    [NOTIFICATION_SETTING addObserver:self selector:@selector(loadDataFromNotice_NewItem:) name:OMWEBSOCKET_SESSIONDETAIL_NEW object:nil];
     
-    [self requireData];
-    
-    // show center loading animation
+    // loading start
     [self.navigationItem startAnimatingAt:ANNavBarLoaderPositionCenter];
 }
 
-#pragma mark - WebSocket Life Cycle
-- (void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:YES];
+
+#pragma mark - Back And Close WebSocket
+- (void)viewWillDisappear:(BOOL)animated{
     
-    // socket settings
-    myWebSocket.delegate = nil;
-    [myWebSocket close];
+    [NOTIFICATION_SETTING postNotificationName:OMWEBSOCKET_CLOSE object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+
+    [NOTIFICATION_SETTING postNotificationName:OMWEBSOCKET_OPEN object:nil];
+}
+
+
+- (void)sendForRequestInitailizeList{
+    
+    NSDictionary *paramDic = @{@"v" : @"2.0",
+                               @"ac" : @"init",
+                               @"loginKey" : [SETTINGs objectForKey:OM_USER_LOGINKEY],
+                               @"actions" : @[@"getChatContent"],
+                               @"subjectPid" : self.model.subjectPid
+                               };
+    
+    NSData *json = [NSJSONSerialization dataWithJSONObject:paramDic options:0 error:nil];
+    NSString *str = [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
+
+    
+    if ([OMCustomTool UserIsLoggingIn]) {
+        [NOTIFICATION_SETTING postNotificationName:OMWEBSOCKET_SESSIONDETAILREQUEST object:nil userInfo:@{@"sessionDetail" : str}];
+    }
+    else{
+    }
+    
+}
+
+- (void)loadDataFromNotice:(NSNotification *)notice{
+    
+    [self.navigationItem stopAnimating];
+    
+    NSArray *dataArr = [NSArray array];
+    dataArr = notice.userInfo[@"chatList"];
+    self.chatArray = [OMChatModel ModelArr_With_DictionaryArr:dataArr];
+    self.chatArray = (NSMutableArray *)[[self.chatArray reverseObjectEnumerator] allObjects];
+    
+    [self.chatTableView reloadData];
+    [self.chatTableView setContentOffset:CGPointMake(0, self.chatTableView.contentSize.height - 1)];
+}
+
+- (void)loadDataFromNotice_NewItem:(NSNotification *)notice{
+    
+     [self.navigationItem stopAnimating];
+    
+    [self.chatArray removeLastObject];
+    
+    // 考虑使用单行刷新
+    NSArray *dataArr = [NSArray array];
+    dataArr = notice.userInfo[@"newChat"];
+    dataArr = [OMChatModel ModelArr_With_DictionaryArr:dataArr];
+    
+    for (OMChatModel *temp in dataArr) {
+        NSLog(@"new session content : %@", temp.content);
+        [self.chatArray addObject:temp];
+    }
+    
+    [self.chatTableView setContentOffset:CGPointMake(0, self.chatTableView.contentSize.height - 1)];
+    [self.chatTableView reloadData];
+    
 }
 
 #pragma mark - Load UI Settings
@@ -110,167 +163,7 @@
 }
 
 #pragma mark - Require Data
-- (void)openWebSocketConnection{
-    
-    // open connection
-    [myWebSocket open];
-    NSLog(@"WebSocket open success!");
 
-}
-- (void)requireData{
-    
-    // load local cache data
-    NSString *sandBoxPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    NSString *cachePath = [sandBoxPath stringByAppendingString:[NSString stringWithFormat:@"/%@_OMMessageDetailCache.plist", self.model.subjectPid]];
-    NSArray *cacheArray = [NSKeyedUnarchiver unarchiveObjectWithFile:cachePath];
-    
-    if (cacheArray.count > 0) {
-        for (OMChatModel *model in cacheArray) {
-            [self.chatArray addObject:model];
-            [self.chatTableView reloadData];
-            
-            [self.hud hide:YES];
-        }
-        
-        [self.chatTableView setContentOffset:CGPointMake(0, self.chatTableView.contentSize.height - 1)];
-    }
-    else{
-        self.chatArray = [NSMutableArray array];
-    }
-}
-
-- (void)requireNewData{
-    
-    if (![OMCustomTool isNullObject:[SETTINGs objectForKey:OM_USER_LOGINKEY]]) {
-        
-        // require data from server
-        NSDictionary *paramDic = @{@"v" : @"2.0",
-                                   @"ac" : @"init",
-                                   @"loginKey" : [SETTINGs objectForKey:OM_USER_LOGINKEY],
-                                   @"actions" : @[@"getChatContent"],
-                                   @"subjectPid" : self.model.subjectPid
-                                   };
-        
-        NSData *json = [NSJSONSerialization dataWithJSONObject:paramDic options:0 error:nil];
-        NSString *str = [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
-        [myWebSocket send:str];
-    }
-    else{
-        
-        // longinKey disabled per 4 hours, require loginKey again
-        [SETTINGs removeObjectForKey:OM_USER_LOGINKEY];
-        [SETTINGs synchronize];
-        
-        NSDictionary *paramDic = @{@"memberUid" : [SETTINGs objectForKey:OM_USER_UID]};
-        [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_GET_LOGINKEY dateBlock:^(id dateBlock) {
-            
-            // save new loginkey in local
-            [SETTINGs setObject:dateBlock[@"Data"][@"LoginKey"] forKey:OM_USER_LOGINKEY];
-            [SETTINGs synchronize];
-            
-            // update
-            [self requireNewData];
-        }];
-    }
-}
-
-#pragma mark - Open WebSocket Connection
-- (void)webSocketDidOpen:(SRWebSocket *)webSocket{
-    
-    NSLog(@"WebSocket require message detail!");
-    
-    [self requireNewData];
-}
-
-#pragma mark - WebSocket DidReceive Message
-- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message
-{
-    NSString *str = [NSString stringWithFormat:@"%@", message];
-    NSDictionary *dicc = [self dictionaryWithJsonString:str];
-    NSLog(@"receive informations : %@", dicc);
-    
-    // ping : connected succeed
-    if ([dicc[@"ac"] isEqualToString:@"ping"]) {
-        
-    }
-    else if ([dicc[@"ac"] isEqualToString:@"init"])
-    {
-        [self.progressAty stopAnimating];
-        
-        // data update
-        if (![dicc[@"getChatContent"][@"contents"] isKindOfClass:[NSNull class]]) {
-            
-            NSString *flag = [NSString stringWithFormat:@"%@", dicc[@"getChatContent"][@"isFirst"]];
-            
-            // isFirst = 1 initialize array of sessions
-            if ([flag integerValue] == 1) {
-                
-                // stop center loading animation
-                [self.navigationItem stopAnimating];
-                
-                self.chatArray = [OMChatModel ModelArr_With_DictionaryArr:dicc[@"getChatContent"][@"contents"]];
-                self.chatArray = (NSMutableArray *)[[self.chatArray reverseObjectEnumerator] allObjects];
-                
-                
-                [self.chatTableView setContentOffset:CGPointMake(0, self.chatTableView.contentSize.height - 1)];
-                [self.chatTableView reloadData];
-                
-                // local cache
-                NSArray *cacheArray = [NSArray arrayWithArray:self.chatArray];
-                NSString *sandBoxPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-
-                NSString *cachePath = [sandBoxPath stringByAppendingString:[NSString stringWithFormat:@"/%@_OMMessageDetailCache.plist", self.model.subjectPid]];
-                [NSKeyedArchiver archiveRootObject:cacheArray toFile:cachePath];
-                NSLog(@"message detail cache path : %@", sandBoxPath);
-            }
-            // isFirst = 0 send message array of sessions
-            else{
-                
-// session cache when connect with socket succeed
-#if 0
-                OMChatModel *tempModel = self.chatArray.lastObject;
-                
-                [SETTINGs setValue:tempModel.content forKey:@"lastSession"];
-                [SETTINGs synchronize];
-                [SETTINGs setValue:self.model.subjectPid forKey:@"lastSessionID"];
-                [SETTINGs synchronize];
-#endif
-                [self.chatArray removeLastObject];
-                
-                NSMutableArray *array = [OMChatModel ModelArr_With_DictionaryArr:dicc[@"getChatContent"][@"contents"]];
-                
-                for (OMChatModel *item in array) {
-                    [self.chatArray addObject:item];
-                }
-                
-                // local cache
-                NSArray *cacheArray = [NSArray arrayWithArray:self.chatArray];
-                NSString *sandBoxPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-                
-                NSString *cachePath = [sandBoxPath stringByAppendingString:[NSString stringWithFormat:@"/%@_OMMessageDetailCache.plist", self.model.subjectPid]];
-                [NSKeyedArchiver archiveRootObject:cacheArray toFile:cachePath];
-                NSLog(@"message detail cache path : %@", sandBoxPath);
-                
-                [self.chatTableView reloadData];
-            }
-            
-            
-            // remove loading
-            [self.hud hide:YES];
-        }
-    }
-    else if ([dicc[@"ac"] isEqualToString:@"logout"]){
-        
-        [myWebSocket close];
-        
-        // remove loading
-        [self.hud hide:YES];
-    }
-    else{
-        // empty
-    }
-    
-}
 
 
 #pragma mark - TableView Delegate
@@ -452,7 +345,9 @@
         
         NSData *json = [NSJSONSerialization dataWithJSONObject:paramDic options:0 error:nil];
         NSString *str = [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
-        [myWebSocket send:str];
+        
+        // post
+        [NOTIFICATION_SETTING postNotificationName:OMWEBSOCKET_SENDMESSAGE object:nil userInfo:@{@"messageContent" : str}];
     }
     else{
         [OMCustomTool OMshowAlertViewWithMessage:@"No message send!" fromViewController:self];

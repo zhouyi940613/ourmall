@@ -120,7 +120,7 @@
         [self loginStatus];
     }
     
-   [NOTIFICATION_SETTING addObserver:self selector:@selector(loginStatus) name:OMUSER_STATUS_LOGIN object:nil];
+    [NOTIFICATION_SETTING addObserver:self selector:@selector(loginStatus) name:OMUSER_STATUS_LOGIN object:nil];
     
    [NOTIFICATION_SETTING addObserver:self selector:@selector(logoutStatus) name:OMUSER_STATUS_LOGOUT object:nil];
 }
@@ -137,23 +137,42 @@
 #endif
     
     // with shop
-#if 1
+#if 0
     
     NSArray *tabs = @[self.homeNavi, self.messageNavi, self.myCartNavi, self.shopNavi, self.accountsNavi];
     self.viewControllers = [tabs copy];
     
 #endif
+    if ([[SETTINGs objectForKey:OM_USER_SHOP_STATUS] isEqualToString:@"1"]) {
+        // shop on
+        
+        NSArray *tabs = @[self.homeNavi, self.messageNavi, self.myCartNavi, self.shopNavi, self.accountsNavi];
+        self.viewControllers = [tabs copy];
+    }
+    else{
+        // shop off
+        NSArray *tabs = @[self.homeNavi, self.messageNavi, self.myCartNavi, self.accountsNavi];
+        self.viewControllers = [tabs copy];
+    }
     
 }
 
 - (void)logoutStatus{
     
-  // message
+  // with shop
+#if 0
+    
+    NSArray *tabs = @[self.homeNavi, self.messageNavi, self.myCartNavi, self.shopNavi, self.visitorNavi];
+    self.viewControllers = [tabs copy];
+
+#endif
+    
+  // without shop
 #if 1
     
     NSArray *tabs = @[self.homeNavi, self.messageNavi, self.myCartNavi, self.visitorNavi];
     self.viewControllers = [tabs copy];
-
+    
 #endif
     
 
@@ -170,14 +189,11 @@
     self.tabBar.shadowImage = [[UIImage alloc] init];
     [self setDelegate:self];
     
-    // WebSocket Settings
-    myWebSocket.delegate = nil;
-    [myWebSocket close];
     
-    myWebSocket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:WEBSOCKET_SERVER_URL]]];
-    myWebSocket.delegate = self;
+    // Socket settings
+    [NOTIFICATION_SETTING addObserver:self selector:@selector(sendRequest) name:OMWEBSOCKET_CONNECTED object:nil];
     
-    [self openWebSocketConection];
+    [NOTIFICATION_SETTING addObserver:self selector:@selector(setUnReadCountWithNotice:) name:OMWEBSOCKET_UNREADCOUNT object:nil];
     
 #if 0
     // add shadow up for footer
@@ -189,10 +205,38 @@
     
 }
 
+
+- (void)sendRequest{
+    
+    if ([OMCustomTool UserIsLoggingIn]) {
+        
+        [NOTIFICATION_SETTING postNotificationName:OMWEBSOCKET_UNREADCOUNTREQUEST object:nil];
+    }
+    else{
+        
+    }
+}
+
+#pragma mark - Set UnRead Count Bage
+- (void)setUnReadCountWithNotice:(NSNotification *)notice{
+    
+    NSString *unReadNumber = notice.userInfo[@"unReadCnt"];
+    
+    if ([unReadNumber integerValue] == 0) {
+        // empty settings
+        self.messageNavi.tabBarItem.badgeValue = nil;
+    }
+    else{
+        // set bage value
+        self.messageNavi.tabBarItem.badgeValue = [NSString stringWithFormat:@"%@", unReadNumber];
+    }
+}
+
+
 #pragma mark -- Override TabBarController Method
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
     
-    // message
+    // with shop
 #if 1
     // limit the authority of visiting each tabbar （add login verification）
     NSInteger index = [self.viewControllers indexOfObject:viewController];
@@ -244,6 +288,45 @@
     }
 #endif
     
+    // without shop
+#if 0
+    // limit the authority of visiting each tabbar （add login verification）
+    NSInteger index = [self.viewControllers indexOfObject:viewController];
+    if (index == 1) {
+        
+        if (![OMCustomTool UserIsLoggingIn]) {
+            OMLoginViewController *loginVC = [[OMLoginViewController alloc] init];
+            [self presentViewController:loginVC animated:YES completion:^{
+                
+            }];
+            return NO;
+        }
+        else{
+            return YES;
+        }
+    }
+    else if (index == 2)
+    {
+        if (![OMCustomTool UserIsLoggingIn]) {
+            OMLoginViewController *loginVC = [[OMLoginViewController alloc] init];
+            [self presentViewController:loginVC animated:YES completion:^{
+                
+            }];
+            return NO;
+        }
+        else{
+            return YES;
+        }
+    }
+    else if (index == 3)
+    {
+        return YES;
+    }
+    else{
+        return YES;
+    }
+    
+#endif
 }
 
 #pragma mark -- Set TabBar Frame
@@ -254,129 +337,6 @@
     tabFrame.origin.y = self.view.frame.size.height - 50;
     self.tabBar.frame = tabFrame;
 
-}
-
-
-#pragma mark - About WebSocket
-- (void)openWebSocketConection{
-    // open connection
-//    [myWebSocket open];
-}
-
-- (void)webSocketDidOpen:(SRWebSocket *)webSocket{
-    
-    NSLog(@"WebSocket require data unRead message count!");
-    
-    [self requireData];
-}
-
-- (void)requireData{
-    
-    if (![OMCustomTool isNullObject:[SETTINGs objectForKey:OM_USER_LOGINKEY]]) {
-        
-        // require data : message unread number
-        NSDictionary *paramDic = @{@"v" : @"2.0",
-                                   @"ac" : @"init",
-                                   @"loginKey" : [SETTINGs objectForKey:OM_USER_LOGINKEY],
-                                   @"actions" : @[@"getUnRead"]
-                                   };
-        
-        NSData *json = [NSJSONSerialization dataWithJSONObject:paramDic options:0 error:nil];
-        NSString *str = [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
-        [myWebSocket send:str];
-    }
-    else{
-        
-        // longinKey disabled per 4 hours, require loginKey again
-        [SETTINGs removeObjectForKey:OM_USER_LOGINKEY];
-        [SETTINGs synchronize];
-        
-        if ([OMCustomTool UserIsLoggingIn]) {
-            NSDictionary *paramDic = @{@"memberUid" : [SETTINGs objectForKey:OM_USER_UID]};
-            [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_GET_LOGINKEY dateBlock:^(id dateBlock) {
-                
-                // save new loginkey in local
-                [SETTINGs setObject:dateBlock[@"Data"][@"LoginKey"] forKey:OM_USER_LOGINKEY];
-                [SETTINGs synchronize];
-                
-                // update
-                [self requireData];
-            }];
-            
-        }
-        else{
-            
-        }
-    }
-    
-}
-
-- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message{
-    
-    NSString *str = [NSString stringWithFormat:@"%@", message];
-    NSDictionary *dicc = [self dictionaryWithJsonString:str];
-    NSLog(@"Receive message unread number : %@", dicc);
-    
-    // ping : connected succeed
-    if ([dicc[@"ac"] isEqualToString:@"ping"]) {
-        // empty settings
-    }
-    // call when new message push
-    else if ([dicc[@"ac"] isEqualToString:@"init"])
-    {
-        // bage number settings
-        NSString *unReadNumber = dicc[@"getUnRead"][@"cnt"];
-        
-        if ([unReadNumber integerValue] > 0) {
-           UITabBarItem *item = [self.tabBarController.tabBar.items objectAtIndex:1];
-           [item setBadgeValue:unReadNumber];
-        }
-        else{
-            // empty settings
-        }
-        
-        // close connenction
-//        [myWebSocket close];
-    }
-    // call when loginkey disabled
-    else if ([dicc[@"ac"] isEqualToString:@"logout"]){
-        
-        // longinKey disabled per 4 hours, require loginKey again
-        [SETTINGs removeObjectForKey:OM_USER_LOGINKEY];
-        [SETTINGs synchronize];
-        
-        NSDictionary *paramDic = @{@"memberUid" : [SETTINGs objectForKey:OM_USER_UID]};
-        [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_GET_LOGINKEY dateBlock:^(id dateBlock) {
-            
-            // save new loginkey in local
-            [SETTINGs setObject:dateBlock[@"Data"][@"LoginKey"] forKey:OM_USER_LOGINKEY];
-            [SETTINGs synchronize];
-            
-            // update
-            [self requireData];
-        }];
-    }
-    else{
-        // empty
-    }
-}
-
-#pragma mark - JSON To Dictionary
-- (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString{
-    
-    if (jsonString == nil) {
-        return nil;
-    }
-    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *error;
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                        options:NSJSONReadingMutableContainers
-                                                          error:&error];
-    if(error) {
-        NSLog(@"Json resolve failed with error : %@",error);
-        return nil;
-    }
-    return dic;
 }
 
 - (void)didReceiveMemoryWarning {

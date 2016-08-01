@@ -11,7 +11,6 @@
 @interface OMShopOrdersViewController : BaseViewController<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *titleSegment;
-
 @property (weak, nonatomic) IBOutlet UITableView *orderTableView;
 
 @end

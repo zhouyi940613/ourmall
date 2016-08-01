@@ -18,5 +18,7 @@
 @property(nonatomic, strong) NSString *productId;
 @property(nonatomic, strong) NSString *profit;
 @property(nonatomic, strong) NSString *timeCreated;
+@property(nonatomic, strong) NSString *isOnSale;
+@property(nonatomic, strong) NSString *hasSelected;
 
 @end

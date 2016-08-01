@@ -7,16 +7,21 @@
 //
 
 #import "OMShopProductViewController.h"
-
 #import "OMShopAddProductVC.h"
+#import "OMEditViewController.h"
+#import "OMProductCategoryViewController.h"
+#import "OMCateSearchViewController.h"
+#import "OMCategoryUpdateViewController.h"
 
 #import "OMShopProductCell.h"
+#import "OMCategoryEditCell.h"
 #import "OMProductModel.h"
 #import "OMCategoryModel.h"
 
 #import "LrdOutputView.h"
+#import <MJRefresh.h>
 
-@interface OMShopProductViewController ()<UITableViewDelegate, UITableViewDataSource, LrdOutputViewDelegate>
+@interface OMShopProductViewController ()<UITableViewDelegate, UITableViewDataSource, LrdOutputViewDelegate,OMCategoryUpdateViewControllerDelegate>
 
 @property(nonatomic, strong) UISegmentedControl *naviSeg;
 
@@ -43,6 +48,21 @@
 
 @property(nonatomic, strong) MBProgressHUD *hud;
 
+@property(nonatomic, assign) NSInteger flag;
+@property(nonatomic, assign) BOOL onSaleFlag;
+@property(nonatomic, assign) BOOL offSaleFlag;
+
+@property(nonatomic, assign)              NSInteger      pageValue;
+@property(nonatomic, assign)              CGFloat        maxPageNumber;
+
+@property(nonatomic, assign)              NSInteger      onSalePageValue;
+@property(nonatomic, assign)              CGFloat        onSaleMaxPageNumber;
+@property(nonatomic, assign)              NSInteger      offSalePageValue;
+@property(nonatomic, assign)              CGFloat        offSaleMaxPageNumber;
+
+@property(nonatomic, strong)              NSString       *currentPageNumber;
+@property(nonatomic, strong)              NSString       *totalCount;
+@property(nonatomic, strong)              NSString       *perPageCount;
 
 @end
 
@@ -57,8 +77,21 @@
         _categoryArray = [NSMutableArray array];
         _onSaleArray = [NSMutableArray array];
         _offSaleArray = [NSMutableArray array];
+        _flag = 0;
+        _onSaleFlag = YES;
+        _offSaleFlag = NO;
     }
     return self;
+}
+
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:YES];
+    [self.mainContainerScrollView setContentOffset:CGPointMake(0, 0)];
+    [self.naviSeg setSelectedSegmentIndex:0];
+    
+    [self loadDataCategories];
 }
 
 #pragma mark - LoadUI
@@ -130,12 +163,14 @@
     self.productTableView.backgroundColor = WhiteBackGroudColor;
     self.productTableView.delegate = self;
     self.productTableView.dataSource = self;
+    self.productTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.categoryTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 60) style:UITableViewStylePlain];
     [rightContainerView addSubview:self.categoryTableView];
     self.categoryTableView.backgroundColor = WhiteBackGroudColor;
     self.categoryTableView.delegate = self;
     self.categoryTableView.dataSource = self;
+    self.categoryTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self.view addSubview:self.mainContainerScrollView];
     
@@ -148,8 +183,9 @@
     // product title buttons
     self.onSaleTitleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.onSaleTitleBtn.frame = CGRectMake(20, 5, SCREEN_WIDTH / 2 - 20 * 2, 44);
-    [self.onSaleTitleBtn setTitle:@"On Sale(12)" forState:UIControlStateNormal];
+    [self.onSaleTitleBtn setTitle:@"" forState:UIControlStateNormal];
     [self.onSaleTitleBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    self.onSaleTitleBtn.titleLabel.font = [UIFont systemFontOfSize:15.0];
     [self.onSaleTitleBtn addTarget:self action:@selector(onSaleBtnClickedAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.onSaleTitleBgView addSubview:self.onSaleTitleBtn];
     
@@ -160,7 +196,8 @@
     self.offSaleTitleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.offSaleTitleBtn.frame = CGRectMake(20, 5, SCREEN_WIDTH / 2 - 20 * 2, 44);
     [self.offSaleTitleBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    [self.offSaleTitleBtn setTitle:@"Pull off shelves(2)" forState:UIControlStateNormal];
+    [self.offSaleTitleBtn setTitle:@"" forState:UIControlStateNormal];
+    self.offSaleTitleBtn.titleLabel.font = [UIFont systemFontOfSize:15.0];
     [self.offSaleTitleBtn addTarget:self action:@selector(offSaleBtnClickedAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.offSaleTitleBgView addSubview:self.offSaleTitleBtn];
     
@@ -201,6 +238,9 @@
     
     [self.naviSeg setSelectedSegmentIndex:0];
     
+    // mjrefresh -- load more datas
+    self.productTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+    
     [self loadDataOnSale];
     [self loadDataCategories];
     
@@ -236,6 +276,13 @@
     [self.onSaleTitleBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.offSaleTitleBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [self loadDataOnSale];
+    
+    self.offSaleFlag = NO;
+    self.onSaleFlag = YES;
+    
+    self.pageValue = self.onSalePageValue;
+    self.maxPageNumber = self.onSaleMaxPageNumber;
+    
 }
 
 - (void)offSaleBtnClickedAction:(UIButton *)btn{
@@ -247,6 +294,12 @@
     [self.onSaleTitleBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [self.offSaleTitleBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self loadDataOffSale];
+    
+    self.onSaleFlag = NO;
+    self.offSaleFlag = YES;
+    
+    self.pageValue = self.offSalePageValue;
+    self.maxPageNumber = self.offSaleMaxPageNumber;
 }
 
 #pragma mark - Add Buttton Clicked Actions
@@ -259,11 +312,34 @@
 - (void)categoryAddBtnClickedAction:(UIButton *)btn{
     
     // motify view
+    OMCategoryUpdateViewController *updateVC = [[OMCategoryUpdateViewController alloc] init];
+    updateVC.delegate = self;
+    updateVC.view.backgroundColor = DefaultBackgroundColor;
+    updateVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    [self presentViewController:updateVC animated:YES completion:^{
+       updateVC.view.superview.backgroundColor = [UIColor clearColor];
+    }];
+}
+
+- (void)saveBnttonClickedEvent_WithTextFieldValue:(NSString *)strValue{
+    
+    NSDictionary *paramDic = @{@"id" : [SETTINGs objectForKey:OM_USER_ID],
+                               @"name" : strValue
+                               };
+    
+    [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_SHOP_CATEGORY_ADD dateBlock:^(id dateBlock) {
+        
+        [self loadDataCategories];
+        [OMCustomTool OMshowAlertViewWithMessage:@"Add Succeed!" fromViewController:self];
+    }];
+    
 }
 
 
 #pragma mark - Require Data
 - (void)loadDataOnSale{
+    
+    [self.hud show:YES];
     
     NSDictionary *paramDic = @{@"id" : [SETTINGs objectForKey:OM_USER_ID],
                                @"page" : @"1",
@@ -271,7 +347,32 @@
                                };
     [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_SHOP_PRODUCT_LIST dateBlock:^(id dateBlock) {
         
+        NSLog(@"onsale list : %@", dateBlock);
+        
+        // calculate max page numbers
+        self.currentPageNumber = dateBlock[@"Data"][@"Pagination"][@"page"];
+        self.totalCount = dateBlock[@"Data"][@"Pagination"][@"totalCount"];
+        self.perPageCount = dateBlock[@"Data"][@"Pagination"][@"rowsPerPage"];
+        self.onSaleMaxPageNumber = [self.totalCount integerValue] / [self.perPageCount integerValue] + 1;
+        self.onSalePageValue = [self.currentPageNumber integerValue];
+        
+        // number settings
+        NSString *onSaleStr = dateBlock[@"Data"][@"Pagination"][@"totalCount"];
+        NSInteger onSaleCount = onSaleStr.integerValue;
+        
+        NSString *totalSaleStr = dateBlock[@"Data"][@"Pagination"][@"allTotalCount"];
+        NSInteger totalCount = totalSaleStr.integerValue;
+        
+        NSInteger offSaleCount = totalCount - onSaleCount;
+        
+        NSString *onSaleTitle = [NSString stringWithFormat:@"On Sale(%ld)", (long)onSaleCount];
+        NSString *offSaleTitle = [NSString stringWithFormat:@"Pull off shelves(%ld)", (long)offSaleCount];
+        
+        [self.onSaleTitleBtn setTitle:onSaleTitle forState:UIControlStateNormal];
+        [self.offSaleTitleBtn setTitle:offSaleTitle forState:UIControlStateNormal];
+        
         self.onSaleArray = [OMProductModel ModelArr_With_DictionaryArr:dateBlock[@"Data"][@"Products"]];
+        
         self.productArray = [NSMutableArray arrayWithArray:self.onSaleArray];
         
         [self.productTableView reloadData];
@@ -282,11 +383,37 @@
 
 - (void)loadDataOffSale{
     
+    [self.hud show:YES];
+    
     NSDictionary *paramDic = @{@"id" : [SETTINGs objectForKey:OM_USER_ID],
                                @"page" : @"1",
                                @"status" : @"2"
                                };
     [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_SHOP_PRODUCT_LIST dateBlock:^(id dateBlock) {
+        
+         NSLog(@"offsale list : %@", dateBlock);
+        
+        // calculate max page numbers
+        self.currentPageNumber = dateBlock[@"Data"][@"Pagination"][@"page"];
+        self.totalCount = dateBlock[@"Data"][@"Pagination"][@"totalCount"];
+        self.perPageCount = dateBlock[@"Data"][@"Pagination"][@"rowsPerPage"];
+        self.offSaleMaxPageNumber = [self.totalCount integerValue] / [self.perPageCount integerValue] + 1;
+        self.offSalePageValue = [self.currentPageNumber integerValue];
+        
+        // number settings
+        NSString *offSaleStr = dateBlock[@"Data"][@"Pagination"][@"totalCount"];
+        NSInteger offSaleCount = offSaleStr.integerValue;
+        
+        NSString *totalSaleStr = dateBlock[@"Data"][@"Pagination"][@"allTotalCount"];
+        NSInteger totalCount = totalSaleStr.integerValue;
+        
+        NSInteger onSaleCount = totalCount - offSaleCount;
+        
+        NSString *onSaleTitle = [NSString stringWithFormat:@"On Sale(%ld)", onSaleCount];
+        NSString *offSaleTitle = [NSString stringWithFormat:@"Pull off shelves(%ld)", offSaleCount];
+        
+        [self.onSaleTitleBtn setTitle:onSaleTitle forState:UIControlStateNormal];
+        [self.offSaleTitleBtn setTitle:offSaleTitle forState:UIControlStateNormal];
         
         self.offSaleArray = [OMProductModel ModelArr_With_DictionaryArr:dateBlock[@"Data"][@"Products"]];
         self.productArray = [NSMutableArray arrayWithArray:self.offSaleArray];
@@ -298,12 +425,96 @@
 
 }
 
+- (void)loadMoreData{
+    
+    if (self.pageValue == 0) {
+        self.pageValue = self.onSalePageValue;
+        self.maxPageNumber = self.onSaleMaxPageNumber;
+    }
+    
+    if (self.pageValue < self.maxPageNumber) {
+        
+        self.pageValue ++;
+        NSString *pageCount = [NSString stringWithFormat:@"%ld", (long)self.pageValue];
+        
+        NSDictionary *paramDic = @{};
+        
+        if (self.onSaleFlag == YES && self.offSaleFlag == NO) {
+            
+            paramDic = @{@"id" : [SETTINGs objectForKey:OM_USER_ID],
+                         @"status" : @"1",
+                         @"page"   : pageCount
+                         };
+        }
+        else if (self.onSaleFlag == NO && self.offSaleFlag == YES)
+        {
+            paramDic = @{@"id" : [SETTINGs objectForKey:OM_USER_ID],
+                         @"status" : @"2",
+                         @"page"   : pageCount
+                         };
+        }
+        else{
+            
+        }
+        
+        [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_SHOP_PRODUCT_LIST dateBlock:^(id dateBlock) {
+            if ([dateBlock[@"ErrorCode"] isEqualToString:REQ_SUCCEED_CODE]) {
+                
+                // add new data
+                NSArray *arr = [NSArray array];
+                arr = dateBlock[@"Data"][@"Products"];
+                
+                NSMutableArray *newArr = [NSMutableArray array];
+                newArr = [OMProductModel ModelArr_With_DictionaryArr:arr];
+                
+                if (self.onSaleFlag == YES && self.offSaleFlag == NO) {
+                    
+                    for (OMProductModel *model in newArr) {
+                        [self.onSaleArray addObject:model];
+                    }
+                    
+                    self.productArray = [NSMutableArray arrayWithArray:self.onSaleArray];
+                }
+                else if (self.onSaleFlag == NO && self.offSaleFlag == YES)
+                {
+                    for (OMProductModel *model in newArr) {
+                        [self.offSaleArray addObject:model];
+                    }
+                    
+                    self.productArray = [NSMutableArray arrayWithArray:self.offSaleArray];
+                }
+                else{
+                    
+                }
+                
+                [self.productTableView reloadData];
+            }
+            else{
+                NSLog(@"!**!MaBang!**!-- Error Message: %@ --!**!MaBang!**!", dateBlock[@"Message"]);
+            }
+        }];
+        
+    }
+    else{
+        
+    }
+    
+    [self.productTableView.mj_footer endRefreshing];
+}
+
+
+- (void)progressHideDelay{
+    
+    [self.hud hide:YES];
+}
+
 - (void)loadDataCategories{
     
     NSDictionary *paramDic = @{@"id" : [SETTINGs objectForKey:OM_USER_ID]};
     
     [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_SHOP_PRODUCT_CATEGORIES_LIST dateBlock:^(id dateBlock) {
         self.categoryArray = [OMCategoryModel ModelArr_With_DictionaryArr:dateBlock[@"Data"][@"Category"][@"list"]];
+        
         [self.categoryTableView reloadData];
     }];
 }
@@ -332,7 +543,7 @@
     }
     else if (tableView == self.categoryTableView)
     {
-        return 60;
+        return 50;
     }
     else{
         return 0;
@@ -357,23 +568,26 @@
         cell.profitLabel.text = [NSString stringWithFormat:@"$%@", [self OMString:model.profit]];
         [cell.operationBtn addTarget:self action:@selector(operationAction:) forControlEvents:UIControlEventTouchUpInside];
         cell.operationBtn.tag = indexPath.row + 500;
+        
+        // set cell unenable click
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         return cell;
         
     }
     else if (tableView == self.categoryTableView)
     {
-        static NSString *reuse = @"reuse";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuse];
+        static NSString *reuse = @"OMCategoryEditCell";
+        OMCategoryEditCell *cell = [tableView dequeueReusableCellWithIdentifier:reuse];
         if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:1 reuseIdentifier:reuse];
+            cell = [[[NSBundle mainBundle] loadNibNamed:reuse owner:nil options:nil] lastObject];
         }
         
         OMCategoryModel *model = [self.categoryArray objectAtIndex:indexPath.row];
-        cell.textLabel.text = model.name;
-        cell.detailTextLabel.text = [self OMString:model.count];
-        cell.accessoryType = 1;
-        
+        cell.categoryNameLabel.text = model.name;
+        cell.itemsNumberLabel.text = [self OMString:model.count];
+        cell.deleteBtn.tag = 700 + indexPath.row;
+        [cell.deleteBtn addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
     else{
@@ -381,27 +595,68 @@
     }
 }
 
+- (void)deleteAction:(UIButton *)btn{
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Attention" message:@"Are you sure of deleting this category?" preferredStyle:1];
+    
+    UIAlertAction *alertActionLeft = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        OMCategoryModel *model = [self.categoryArray objectAtIndex:btn.tag - 700];
+        [self.categoryArray removeObject:model];
+        [self.categoryTableView reloadData];
+        
+        // interface call
+        NSDictionary *paramDic = @{@"id" : [SETTINGs objectForKey:OM_USER_ID],
+                                   @"sponsorCategoryId" : model.categoryId
+                                   };
+        [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_SHOP_CATEGORY_DELETE dateBlock:^(id dateBlock) {
+            
+        }];
+        
+    }];
+    UIAlertAction *alertActionRight = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        [self dismissViewControllerAnimated:YES completion:^{
+            
+        }];
+        
+    }];
+    [alert addAction:alertActionLeft];
+    [alert addAction:alertActionRight];
+    
+    [self presentViewController:alert animated:YES completion:^{
+        
+    }];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (tableView == self.categoryTableView) {
+        
+        OMCateSearchViewController *searchVC = [[OMCateSearchViewController alloc] init];
+        OMCategoryModel *model = [self.categoryArray objectAtIndex:indexPath.row];
+        searchVC.model = model;
+        [self.navigationController pushViewController:searchVC animated:YES];
+        
+    }
+    else{
+        
+    }
+}
 
 - (void)operationAction:(UIButton *)btn{
     
-//    OMProductModel *model = [self.productArray objectAtIndex:(btn.tag - 500)];
-    NSIndexPath *index = [NSIndexPath indexPathForRow:btn.tag - 500 inSection:0];
-    NSLog(@"row : %ld", index.row);
+    self.flag = btn.tag - 500;
     
+    OMProductModel *model = [self.productArray objectAtIndex:(btn.tag - 500)];
+//    NSIndexPath *index = [NSIndexPath indexPathForRow:btn.tag - 500 inSection:0];
     
-    CGPoint newPoint = CGPointMake(btn.center.x + 15, index.row * 130 + 64 + 50 + 80);
-
     CGPoint oldPoint = [btn convertPoint:btn.frame.origin toView:nil];
     
     oldPoint.x = btn.center.x;
     
     oldPoint.x = oldPoint.x + 15;
     oldPoint.y = oldPoint.y - 90;
-    
-    
-    NSLog(@"old x : %f, old y :%f", oldPoint.x, oldPoint.y);
-    NSLog(@"new x : %f, new y :%f", newPoint.x, newPoint.y);
-    
     
     // show menu
     CGFloat x = oldPoint.x;
@@ -410,11 +665,22 @@
     LrdCellModel *editItem = [[LrdCellModel alloc] initWithTitle:@"Edit" imageName:@""];
     LrdCellModel *categoryItem = [[LrdCellModel alloc] initWithTitle:@"Category" imageName:@""];
     LrdCellModel *offItem = [[LrdCellModel alloc] initWithTitle:@"Off the shelf" imageName:@""];
+    LrdCellModel *onItem = [[LrdCellModel alloc] initWithTitle:@"On sale" imageName:@""];
+    
     LrdCellModel *deleteItem = [[LrdCellModel alloc] initWithTitle:@"Delete" imageName:@""];
     LrdCellModel *moveUpItem = [[LrdCellModel alloc] initWithTitle:@"Move up" imageName:@""];
     LrdCellModel *moveDownItem = [[LrdCellModel alloc] initWithTitle:@"Move down" imageName:@""];
     
-     NSArray *itemsArray = @[editItem, categoryItem, offItem, deleteItem, moveUpItem, moveDownItem];
+    
+    NSArray *itemsArray = [NSArray array];
+    
+    if ([[self OMString:model.isOnSale] integerValue] == 1) {
+    
+        itemsArray = @[editItem, categoryItem, offItem, deleteItem, moveUpItem, moveDownItem];
+    }
+    else{
+        itemsArray = @[editItem, categoryItem, onItem, deleteItem, moveUpItem, moveDownItem];
+    }
     
     if (oldPoint.y > 350) {
         // top
@@ -433,36 +699,136 @@
 #pragma mark - DropMenu Delegate Method
 - (void)didSelectedAtIndexPath:(NSIndexPath *)indexPath{
     
+    OMProductModel *model = [self.productArray objectAtIndex:self.flag];
     
-}
-
-- (void)editAction:(UIMenuItem *)item{
+    if (indexPath.row == 0) {
+        // edit
+        OMEditViewController *editVC = [[OMEditViewController alloc] init];
+        [self.navigationController pushViewController:editVC animated:YES];
+        editVC.myProductId = model.productId;
+        editVC.myHeadStr = model.name;
+        editVC.verifyFlag = @"0";
+        editVC.myHasSelected = model.hasSelected;
+    }
+    else if (indexPath.row == 1)
+    {
+        // category
+        OMProductCategoryViewController *cateVC = [[OMProductCategoryViewController alloc] init];
+        [self.navigationController pushViewController:cateVC animated:YES];
+        cateVC.productId = model.productId;
+        cateVC.headStr = model.name;
+        cateVC.hasSelected = model.hasSelected;
+        
+    }
+    else if (indexPath.row == 2)
+    {
+        // on sale or off shelves
+        if ([[self OMString:model.isOnSale] integerValue] == 1) {
+            // operation : off sale
+//            [self.productArray removeObjectAtIndex:self.flag];
+//            [self.productTableView reloadData];
+            
+            // off sale interface
+            NSDictionary *paramDic = @{@"id" : [SETTINGs objectForKey:OM_USER_ID],
+                                       @"productId" : [self OMString:model.productId],
+                                       @"type" : @"1",
+                                       @"doType" : @"1"
+                                       };
+            [self sendOperationResultToServer:paramDic];
+        }
+        else{
+            // operation : on sale
+//            [self.productArray removeObjectAtIndex:self.flag];
+//            [self.productTableView reloadData];
+            
+            // on sale interface
+            NSDictionary *paramDic = @{@"id" : [SETTINGs objectForKey:OM_USER_ID],
+                                       @"productId" : [self OMString:model.productId],
+                                       @"type" : @"2",
+                                       @"doType" : @"2"
+                                       };
+            [self sendOperationResultToServer:paramDic];
+        }
+    }
+    else if (indexPath.row == 3)
+    {
+        // delete
+//        [self.productArray removeObjectAtIndex:self.flag];
+//        [self.productTableView reloadData];
     
-}
-
-- (void)categoryAction:(UIMenuItem *)item{
-    
-}
-
-- (void)offShelfAction:(UIMenuItem *)item{
-    
-}
-
-- (void)deleteAction:(UIMenuItem *)item{
-    
-}
-
-- (void)moveUpAction:(UIMenuItem *)item{
-    
-}
-
-- (void)moveDownAction:(UIMenuItem *)item{
+        // synchronization server
+        NSDictionary *paramDic = @{@"id" : [SETTINGs objectForKey:OM_USER_ID],
+                                   @"productId" : [self OMString:model.productId],
+                                   @"type" : [self OMString:model.isOnSale],
+                                   @"doType" : @"4"
+                                   };
+        
+        [self sendOperationResultToServer:paramDic];
+    }
+    else if (indexPath.row == 4)
+    {
+        // move up
+        if (self.flag > 0) {
+            
+//            [self.productArray exchangeObjectAtIndex:self.flag withObjectAtIndex:self.flag - 1];
+//            [self.productTableView reloadData];
+        }
+        else{
+            
+        }
+        // synchronization server
+        NSDictionary *paramDic = @{@"id" : [SETTINGs objectForKey:OM_USER_ID],
+                                   @"productId" : [self OMString:model.productId],
+                                   @"type" : [self OMString:model.isOnSale],
+                                   @"doType" : @"5"
+                                   };
+        [self sendOperationResultToServer:paramDic];
+    }
+    else{
+        // move down
+        
+        if (self.flag < self.productArray.count - 1) {
+            
+//            [self.productArray exchangeObjectAtIndex:self.flag withObjectAtIndex:self.flag + 1];
+//            [self.productTableView reloadData];
+        }
+        else{
+            
+        }
+        // synchronization server
+        NSDictionary *paramDic = @{@"id" : [SETTINGs objectForKey:OM_USER_ID],
+                                   @"productId" : [self OMString:model.productId],
+                                   @"type" : [self OMString:model.isOnSale],
+                                   @"doType" : @"6"
+                                   };
+        [self sendOperationResultToServer:paramDic];
+    }
     
 }
 
 - (BOOL)canBecomeFirstResponder{
     return YES;
 }
+
+
+- (void)sendOperationResultToServer:(NSDictionary *)paramDIc{
+    
+    [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDIc API:API_SHOP_Product_EDIT dateBlock:^(id dateBlock) {
+        
+        if ([[paramDIc objectForKey:@"type"] isEqualToString:@"1"]) {
+            [self loadDataOnSale];
+        }
+        else{
+            [self loadDataOffSale];
+        }
+    }];
+    
+}
+
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

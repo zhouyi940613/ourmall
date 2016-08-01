@@ -22,6 +22,7 @@
 @property(nonatomic, strong) NSString *frozenAmout;
 @property(nonatomic, strong) NSString *totalCash;
 @property(nonatomic, strong) NSString *ongoingCash;
+@property(nonatomic, strong) NSString *withdrawingAmounts;
 
 @end
 
@@ -53,7 +54,7 @@
     self.title = @"Balance";
     
     [self LoadHeaderView];
-    self.tableViewBalance.rowHeight = 90;
+    self.tableViewBalance.rowHeight = 65;
     self.tableViewBalance.bounces = NO;
     self.tableViewBalance.separatorColor = OMSeparatorLineColor;
     
@@ -73,11 +74,14 @@
     [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDicAll API:API_S_DETAIL_INFORMATION dateBlock:^(id dateBlock) {
         NSLog(@"With_Draw account data : %@", dateBlock);
         NSMutableDictionary *dic = [OMCustomTool OMDeleteAllNullValueInDic:dateBlock[@"Data"][@"MemberInfo"]];
+        
         NSString *str1 =  self.balance = [dic objectForKey:@"balance"];
         NSString *str2 =  self.ongoingCash = [dic objectForKey:@"ongoingCash"];
         NSString *str3 =  self.frozenAmout = [dic objectForKey:@"frozenAmount"];
         NSString *str4 =  self.totalCash = [dic objectForKey:@"totalGetCash"];
-        self.accountArray = [NSMutableArray arrayWithObjects:str1, str2, str3, str4, nil];
+        NSString *str5 =  self.withdrawingAmounts = [dic objectForKey:@"withdrawingAmounts"];
+        
+        self.accountArray = [NSMutableArray arrayWithObjects:str1, str2, str3, str4, str5, nil];
         
         // hide redundant separator lines
         [self setExtraCellLineHidden:self.tableViewBalance WithCurrentArray:self.accountArray];
@@ -118,12 +122,27 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:reuse owner:nil options:nil] lastObject];
         }
         // withdrawing amounts
+        cell.titleLabel.text = @"Frozen Amounts(US$)";
+        cell.numberLabel.text = [self OMString:[self.accountArray objectAtIndex:2]];
+        cell.nextImg.hidden = YES;
+        
+        return cell;
+    }
+    else if (indexPath.row == 1) {
+        
+        static NSString *reuse = @"OMBalanceCell";
+        OMBalanceCell *cell = [tableView dequeueReusableCellWithIdentifier:reuse];
+        
+        if (!cell) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:reuse owner:nil options:nil] lastObject];
+        }
+        // withdrawing amounts
         cell.titleLabel.text = @"Ongoing Amounts(US$)";
         cell.numberLabel.text = [self OMString:[self.accountArray objectAtIndex:1]];
         
         return cell;
     }
-    else if (indexPath.row == 1)
+    else if (indexPath.row == 2)
     {
         static NSString *reuse = @"OMBalanceCell";
         OMBalanceCell *cell = [tableView dequeueReusableCellWithIdentifier:reuse];
@@ -133,13 +152,13 @@
         }
         // withdrawing amounts
         cell.titleLabel.text = @"Withdrawing Amounts(US$)";
-        cell.numberLabel.text = [self OMString:[self.accountArray objectAtIndex:2]];
+        cell.numberLabel.text = [self OMString:[self.accountArray objectAtIndex:4]];
         cell.nextImg.hidden = YES;
         return cell;
         
         
     }
-    else if (indexPath.row == 2){
+    else if (indexPath.row == 3){
         
         static NSString *reuse = @"OMBalanceCell";
         OMBalanceCell *cell = [tableView dequeueReusableCellWithIdentifier:reuse];
@@ -171,11 +190,11 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row == 3) {
+    if (indexPath.row == 4) {
         OMAcountDetailViewController *detailVC = [[OMAcountDetailViewController alloc] init];
         [self.navigationController pushViewController:detailVC animated:YES];
     }
-    else if (indexPath.row == 0)
+    else if (indexPath.row == 1)
     {
         [self.tabBarController setSelectedIndex:2];
     }

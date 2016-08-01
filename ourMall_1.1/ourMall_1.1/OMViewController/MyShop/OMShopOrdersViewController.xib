@@ -29,10 +29,10 @@
                     </segments>
                     <color key="tintColor" red="0.86274509799999999" green="0.33333333329999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                 </segmentedControl>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="221" sectionHeaderHeight="1" sectionFooterHeight="1" id="LBJ-qG-OYi">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="130" sectionHeaderHeight="18" sectionFooterHeight="18" id="LBJ-qG-OYi">
                     <rect key="frame" x="0.0" y="48" width="320" height="520"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="hmA-aR-kGP"/>
                         <outlet property="delegate" destination="-1" id="BHk-SV-jQf"/>
@@ -40,7 +40,7 @@
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
-            <point key="canvasLocation" x="154" y="-6"/>
+            <point key="canvasLocation" x="-10" y="-51"/>
         </view>
     </objects>
 </document>

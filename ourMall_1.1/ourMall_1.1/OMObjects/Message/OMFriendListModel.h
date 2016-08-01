@@ -17,8 +17,7 @@
 @property(nonatomic, strong) NSString *otherId;
 
 @property(nonatomic, strong) NSDictionary *plus;
-@property(nonatomic, strong) NSArray *imgUrls;
-@property(nonatomic, strong) NSString *name;
+
 // occur sometimes
 @property(nonatomic, strong) NSString *sellerId;
 @property(nonatomic, strong) NSString *sponsorName;

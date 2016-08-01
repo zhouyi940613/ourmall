@@ -9,10 +9,8 @@
 #import "BaseViewController.h"
 #import <SRWebSocket.h>
 
-@interface OMMessageViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate, SRWebSocketDelegate>
-{
-    SRWebSocket *myWebSocket;
-}
+@interface OMMessageViewController : BaseViewController<UITableViewDataSource, UITableViewDelegate>
+
 
 @property (weak, nonatomic) IBOutlet UITableView *tableViewMessage;
 

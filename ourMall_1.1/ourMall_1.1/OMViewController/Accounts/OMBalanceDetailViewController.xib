@@ -22,7 +22,7 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="dhE-Zh-Cog">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="2uw-xD-RSy"/>
                         <outlet property="delegate" destination="-1" id="ZM2-iQ-zh3"/>
@@ -30,7 +30,7 @@
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="145" y="277"/>
+            <point key="canvasLocation" x="92" y="205"/>
         </view>
         <view contentMode="scaleToFill" id="2tO-CC-8yR">
             <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
@@ -64,7 +64,7 @@
             </subviews>
             <color key="backgroundColor" red="0.86274509803921573" green="0.33333333333333331" blue="0.38431372549019605" alpha="1" colorSpace="calibratedRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="191" y="-139"/>
+            <point key="canvasLocation" x="92" y="-189"/>
         </view>
     </objects>
 </document>

@@ -10,13 +10,9 @@
 
 @interface OMProductCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *productNoLabel;
-@property (weak, nonatomic) IBOutlet UILabel *productStatusLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *productImg;
 @property (weak, nonatomic) IBOutlet UILabel *productDesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *productPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *productCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *productProfitLabel;
-@property (weak, nonatomic) IBOutlet UILabel *productAmoutLabel;
 
 @end

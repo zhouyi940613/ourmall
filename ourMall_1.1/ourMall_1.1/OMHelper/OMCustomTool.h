@@ -213,4 +213,12 @@ typedef void(^NetworkDate)(id dateBlock);
 + (UIImage *)loadImage:(NSString *)fileName ofType:(NSString *)extension inDirectory:(NSString *)directoryPath;
 
 
+
++ (void)OMRequestForNewLoginKey;
+
+
+
++ (NSString *)OMReturnParametersWithDicForSessionList;
+
+
 @end

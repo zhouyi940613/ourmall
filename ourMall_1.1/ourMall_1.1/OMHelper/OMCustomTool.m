@@ -412,20 +412,18 @@
 #pragma mark - JPUSH SEND REGISTER INFORMATION TO SERVER
 + (void)transformRigisterInformationsToServer{
     
-    // varify connection open
-    if ([[SETTINGs objectForKey:OMWEBSOCKT_STATUS] isEqualToString:@"on"]) {
-        
-        NSString *baseStr = [NSString stringWithFormat:@"%@%@%@", OMJPUSH_APP_KEY, @"2", [JPUSHService registrationID]];
+        NSString *baseStr = [NSString stringWithFormat:@"%@%@%@", OMJPUSH_APP_KEY, @"3", [JPUSHService registrationID]];
         NSString *encryptStr = [baseStr md5HexDigest];
         
-        if ([OMCustomTool isNullObject:[SETTINGs objectForKey:OM_USER_UID]]) {
+        if (![OMCustomTool isNullObject:[SETTINGs objectForKey:OM_USER_UID]]) {
             
             NSDictionary *paramDic = @{@"memberUid"     : [SETTINGs objectForKey:OM_USER_UID],
                                        @"jpushCode"     : [JPUSHService registrationID],
                                        @"platform"      : @"2",
-                                       @"deviceVersion" : @"2",
+                                       @"deviceVersion" : @"3",
                                        @"versionCode"   : encryptStr
                                        };
+            
             [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_SEND_JPUSH_RION dateBlock:^(id dateBlock) {
                 
                 NSLog(@"send register information return data : %@", dateBlock);
@@ -435,11 +433,6 @@
         else{
             
         }
-        
-    }
-    else{
-        
-    }
 }
 
 
@@ -499,6 +492,12 @@
     [SETTINGs synchronize];
     [SETTINGs setValue:dic[@"portrait"] forKey:OM_USER_ICON];
     [SETTINGs synchronize];
+    
+    // message authority
+    [SETTINGs setValue:[NSString stringWithFormat:@"%@", dic[@"canOpenShop"]] forKey:OM_USER_SHOP_STATUS];
+    [SETTINGs synchronize];
+    
+   
     
     // save userIcon in local file
     NSString *sandBoxPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
@@ -564,5 +563,50 @@
     
     return result;
 }
+
+
++ (void)OMRequestForNewLoginKey{
+    
+    // longinKey disabled per 4 hours, require loginKey again
+    [SETTINGs removeObjectForKey:OM_USER_LOGINKEY];
+    [SETTINGs synchronize];
+    
+    if ([self UserIsLoggingIn]) {
+        
+        NSDictionary *paramDic = @{@"memberUid" : [SETTINGs objectForKey:OM_USER_UID]};
+        
+        [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_GET_LOGINKEY dateBlock:^(id dateBlock) {
+            
+            // save new loginkey in local
+            [SETTINGs setObject:dateBlock[@"Data"][@"LoginKey"] forKey:OM_USER_LOGINKEY];
+            [SETTINGs synchronize];
+        }];
+        
+    }
+    else{
+        NSLog(@"OMWarning : User login status error!");
+    }
+}
+
+
+#pragma mark - WebSocket Send Parameters
++ (NSString *)OMReturnParametersWithDicForSessionList{
+        
+        // require data : session list
+        NSDictionary *paramDic = @{@"v" : @"2.0",
+                                   @"ac" : @"init",
+                                   @"loginKey" : [SETTINGs objectForKey:OM_USER_LOGINKEY],
+                                   @"actions" : @[@"getUnRead"],
+                                   @"isSubjectListPage" : @"1"
+                                   };
+        
+        NSData *json = [NSJSONSerialization dataWithJSONObject:paramDic options:0 error:nil];
+        NSString *str = [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
+        
+        return str;
+}
+
+
+
 
 @end

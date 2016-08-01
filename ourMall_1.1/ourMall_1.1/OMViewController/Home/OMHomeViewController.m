@@ -299,7 +299,20 @@
             
             OMHomeTaskModel *model = [self.homeCellArray objectAtIndex:indexPath.row];
             
-            cell.titleImageView.image = IMAGE(@"moren.jpg");
+            [OMCustomTool SDSetImageView:cell.titleImageView withURLString:model.imgUrl andPlacehoderImageName:OMPORDUCT_ICONIMG];
+            
+            CGFloat newHeight = 380.0;
+            cell.titleImageView.frame = CGRectMake(0, 0, SCREEN_WIDTH, newHeight);
+            cell.titleImageView.image = IMAGE(@"productPlacer.png");
+            
+            // set other container size in cell
+            cell.titleLabel.frame = CGRectMake(10, 10 + newHeight, SCREEN_WIDTH - 20, 40);
+            cell.fansNumberImg.frame = CGRectMake(10, 10 + newHeight + 40 + 10, 20, 20);
+            cell.fansNumberLabel.frame = CGRectMake(10 + 20, 10 + newHeight + 40 + 10, 35, 20);
+            cell.facebookImg.frame = CGRectMake(10 + 20 + 40, 10 + newHeight + 40 + 10, 25, 25);
+            cell.twitterImg.frame = CGRectMake(10 + 20 + 40 + 30, 10 + newHeight + 40 + 10, 25, 25);
+            cell.applyLabel.frame = CGRectMake(SCREEN_WIDTH - 10 - 85, 10 + newHeight + 40 + 10, 85, 30);
+            cell.separatorLine.frame = CGRectMake(0, 10 + newHeight + 40 + 10 + 35 + 2, SCREEN_WIDTH, 1);
             
             // resize image
             SDWebImageManager *manager = [SDWebImageManager sharedManager];
@@ -338,7 +351,7 @@
                     }
                 }
                 else{
-                
+                 
                 }
             
             }];

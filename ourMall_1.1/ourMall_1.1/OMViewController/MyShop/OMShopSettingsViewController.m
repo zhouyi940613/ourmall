@@ -8,7 +8,7 @@
 
 #import "OMShopSettingsViewController.h"
 
-@interface OMShopSettingsViewController ()
+@interface OMShopSettingsViewController ()<UITextFieldDelegate>
 
 // container view
 @property(nonatomic, strong) UIView *containerView;
@@ -39,6 +39,7 @@
 @property(nonatomic, strong) UILabel *profitUpDetailLabel;
 
 // content part
+@property(nonatomic, strong) UILabel *sliderLabel;
 @property(nonatomic, strong) UISlider *profitUpSlider;
 @property(nonatomic, strong) UILabel *marginDesLabel;
 @property(nonatomic, strong) UITextField *marginInputTextField;
@@ -76,6 +77,14 @@
 
 @property(nonatomic, assign) BOOL upSwitchStatus;
 @property(nonatomic, assign) BOOL downSwitchStatus;
+
+@property(nonatomic, strong) NSString *upSliderDefaultValue;
+@property(nonatomic, strong) NSString *downSliderDefaultValue;
+@property(nonatomic, strong) NSString *upSwitchDefaultStatu;
+@property(nonatomic, strong) NSString *downSwitchDefaultStatu;
+@property(nonatomic, strong) NSString *defaultTheme;
+
+@property(nonatomic, strong) MBProgressHUD *hud;
 
 @end
 
@@ -190,6 +199,15 @@
     self.profitUpSlider.minimumTrackTintColor = OMCustomRedColor;
     self.profitUpSlider.thumbTintColor = OMCustomRedColor;
     
+    self.profitUpSlider.minimumValue = 0.0;
+    self.profitUpSlider.maximumValue = 100.0;
+    [self.profitUpSlider addTarget:self action:@selector(profitUpSliderScrollAction:) forControlEvents:UIControlEventValueChanged];
+    
+    self.sliderLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 15 + 20, 40, 15)];
+    self.sliderLabel.font = [UIFont systemFontOfSize:15.0];
+    [self.contentContainerUpView addSubview:self.sliderLabel];
+    self.sliderLabel.textColor = OMCustomRedColor;
+    
     // content
     self.marginDesLabel = [[UILabel alloc] initWithFrame:CGRectMake(23, 15 + 20 + 20 + 5 + 20 + 10 + 5, 110, 20)];
     [self.contentContainerUpView addSubview:self.marginDesLabel];
@@ -201,6 +219,7 @@
     self.marginInputTextField.backgroundColor = WhiteBackGroudColor;
     self.marginInputTextField.layer.borderColor = OMSeparatorLineColor.CGColor;
     self.marginInputTextField.layer.borderWidth = 1;
+    self.marginInputTextField.delegate = self;
     
     self.marginSymbolLabel = [[UILabel alloc] initWithFrame:CGRectMake(150 + 80 + 5, 15 + 20 + 20 + 5 + 20 + 10 + 5, 20, 20)];
     [self.contentContainerUpView addSubview:self.marginSymbolLabel];
@@ -215,6 +234,7 @@
     self.saveBtn.backgroundColor = OMCustomRedColor;
     [self.saveBtn setTitleColor:WhiteBackGroudColor forState:UIControlStateNormal];
     [OMCustomTool setcornerOfView:self.saveBtn withRadius:5 color:ClearBackGroundColor];
+    [self.saveBtn addTarget:self action:@selector(saveBtnClickedAction:) forControlEvents:UIControlEventTouchUpInside];
     
     self.separatorViewHideUp = [[UIView alloc] initWithFrame:CGRectMake(0, 129, self.contentContainerUpView.frame.size.width, 1)];
     [self.contentContainerUpView addSubview:self.separatorViewHideUp];
@@ -226,7 +246,6 @@
     // down title container
     self.recomDownImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 15, 20, 20)];
     [self.titleDowncontainerView addSubview:self.recomDownImg];
-//    self.recomDownImg.backgroundColor = WhiteBackGroudColor;
     [self.recomDownImg setImage:IMAGE(@"autoFill.png")];
     
     self.recomDownLabel = [[UILabel alloc] initWithFrame:CGRectMake(23, 15, 200, 20)];
@@ -251,7 +270,6 @@
     // title
     self.profitDownImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 15, 20, 20)];
     [self.contentContainerDownView addSubview:self.profitDownImg];
-//    self.profitDownImg.backgroundColor = WhiteBackGroudColor;
     [self.profitDownImg setImage:IMAGE(@"dollar.png")];
     
     self.profitDownLabel = [[UILabel alloc] initWithFrame:CGRectMake(23, 15, 160, 20)];
@@ -285,6 +303,11 @@
     self.profitDownSlider.minimumTrackTintColor = OMCustomBlueColor;
     self.profitDownSlider.thumbTintColor = OMCustomBlueColor;
     self.profitDownSlider.maximumTrackTintColor = OMCustomRedColor;
+    [self.profitDownSlider addTarget:self action:@selector(profitDownSliderScrollAction:) forControlEvents:UIControlEventValueChanged];
+    [self.profitDownSlider addTarget:self action:@selector(profitDownSliderDragEnd:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.profitDownSlider.maximumValue = 100.0;
+    self.profitDownSlider.minimumValue = 0.0;
     
     self.distributeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 15 + 20 + 20 + 5 + 20 + 10, 100, 15)];
     [self.contentContainerDownView addSubview:self.distributeLabel];
@@ -329,11 +352,13 @@
     [self.redBtn setFrame:CGRectMake(23, 45, 50, 50)];
     [self.bottomContainerView addSubview:self.redBtn];
     self.redBtn.backgroundColor = OMCustomRedColor;
+    [self.redBtn addTarget:self action:@selector(redBtnClickedAction:) forControlEvents:UIControlEventTouchUpInside];
     
     self.blackBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.blackBtn setFrame:CGRectMake(23 + 50 + 10, 45, 50, 50)];
     [self.bottomContainerView addSubview:self.blackBtn];
     self.blackBtn.backgroundColor = [UIColor blackColor];
+    [self.blackBtn addTarget:self action:@selector(blackBtnClickedAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 
@@ -446,6 +471,7 @@
     self.profitUpLabel.hidden = YES;
     self.profitUpDetailLabel.hidden = YES;
     self.profitUpSlider.hidden = YES;
+    self.sliderLabel.hidden = YES;
     // content
     self.marginDesLabel.hidden = YES;
     self.marginInputTextField.hidden = YES;
@@ -474,6 +500,7 @@
     self.profitUpLabel.hidden = NO;
     self.profitUpDetailLabel.hidden = NO;
     self.profitUpSlider.hidden = NO;
+    self.sliderLabel.hidden = NO;
     // content
     self.marginDesLabel.hidden = NO;
     self.marginInputTextField.hidden = NO;
@@ -507,6 +534,9 @@
                 [self updateUIStyle_ShowUpContentPart];
                 [self performSelector:@selector(showUpContentPart) withObject:nil afterDelay:0.15];
             }];
+            
+            // transmit parameter
+            [self transformParameterWithUpSwitchOn];
         }
         else{
             
@@ -515,6 +545,9 @@
                 [self updateUIStyle_HideUpContentPart];
                 [self hideUpContentPart];
             }];
+            
+            // transmit parameter
+            [self transformParameterWithUpSwitchOff];
         }
     }
     else{
@@ -525,6 +558,9 @@
                 [self updateUIStyle_ShowUpContentPartWithDownSwitchOff];
                 [self performSelector:@selector(showUpContentPart) withObject:nil afterDelay:0.15];
             }];
+            
+            // transmit parameter
+            [self transformParameterWithUpSwitchOn];
         }
         else{
             
@@ -533,6 +569,9 @@
                 [self updateUIStyle_HideUpContentPartWithDownSwitchOff];
                 [self hideUpContentPart];
             }];
+            
+            // transmit parameter
+            [self transformParameterWithUpSwitchOff];
         }
     }
 }
@@ -548,6 +587,8 @@
                 [self performSelector:@selector(showDownContentPart) withObject:nil afterDelay:0.15];
             }];
             
+            // transmit parameter
+            [self transformParameterWithDownSwitchOn];
         }
         else{
             
@@ -558,6 +599,8 @@
                 
             }];
             
+            // transmit parameter
+            [self transformParameterWithDownSwitchOff];
         }
     }
     else{
@@ -569,6 +612,8 @@
                 [self performSelector:@selector(showDownContentPart) withObject:nil afterDelay:0.15];
             }];
             
+            // transmit parameter
+            [self transformParameterWithDownSwitchOn];
         }
         else{
             
@@ -579,10 +624,61 @@
                 
             }];
             
+            // transmit parameter
+            [self transformParameterWithDownSwitchOff];
         }
     }
 }
 
+#pragma mark - Transmit Parameters - Switch Part
+- (void)transformParameterWithUpSwitchOn{
+
+    // on statusus
+    NSLog(@"up switch on");
+    
+    NSDictionary *paramDic = @{@"id" : [SETTINGs objectForKey:OM_USER_ID],
+                               @"autoFillProducts" : @"1"
+                               };
+    [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_SHOP_SETTINGS dateBlock:^(id dateBlock) {
+    }];
+
+}
+
+- (void)transformParameterWithUpSwitchOff{
+    
+    // off status
+    NSLog(@"up switch off");
+    
+    NSDictionary *paramDic = @{@"id" : [SETTINGs objectForKey:OM_USER_ID],
+                               @"autoFillProducts" : @"2"
+                               };
+    [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_SHOP_SETTINGS dateBlock:^(id dateBlock) {
+    }];
+}
+
+- (void)transformParameterWithDownSwitchOn{
+    
+    // on status
+    NSLog(@"down switch on");
+    
+    NSDictionary *paramDic = @{@"id" : [SETTINGs objectForKey:OM_USER_ID],
+                               @"openReturnToFans" : @"1"
+                               };
+    [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_SHOP_SETTINGS dateBlock:^(id dateBlock) {
+    }];
+}
+
+- (void)transformParameterWithDownSwitchOff{
+    
+    // off status
+    NSLog(@"down switch off");
+    
+    NSDictionary *paramDic = @{@"id" : [SETTINGs objectForKey:OM_USER_ID],
+                               @"openReturnToFans" : @"2"
+                               };
+    [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_SHOP_SETTINGS dateBlock:^(id dateBlock) {
+    }];
+}
 
 #pragma mark - viewDidLoad
 - (void)viewDidLoad {
@@ -590,11 +686,225 @@
     // Do any additional setup after loading the view.
     
     self.view.backgroundColor = OMSeparatorLineColor;
-    
+    self.title = @"My Shop";
     [self UIInit];
     
-    [self.recomUpSwitch setOn:YES animated:NO];
-    [self.recomDownSwitch setOn:YES animated:NO];
+    [self loadData];
+    
+    // laoding animation
+    self.hud = [[MBProgressHUD alloc] init];
+    [self.view addSubview:self.hud];
+    [self.hud show:YES];
+}
+
+
+#pragma mark - Load Data
+- (void)loadData{
+    
+    NSDictionary *paramDic = @{@"id" : [SETTINGs objectForKey:OM_USER_ID]
+                               };
+    [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_S_DETAIL_INFORMATION dateBlock:^(id dateBlock) {
+        
+        NSArray *verifyArr = dateBlock[@"Data"][@"MemberInfo"];
+        
+        if (verifyArr.count > 0) {
+            
+            NSDictionary *dic = dateBlock[@"Data"][@"MemberInfo"][@"shopDetail"];
+            
+            self.upSwitchDefaultStatu = [self OMString:dic[@"autoFillProducts"]];
+            self.downSwitchDefaultStatu = [self OMString:dic[@"openReturnToFans"]];
+            self.defaultTheme = dic[@"theme"];
+            self.upSliderDefaultValue = [self OMString:dic[@"productProfileRate"]];
+            self.downSliderDefaultValue = [self OMString:dic[@"returnToFansRate"]];
+            
+            // set value for widgets
+            CGFloat horizontalPosition = self.upSliderDefaultValue.integerValue * (self.profitUpSlider.frame.size.width / 100.0);
+            
+            self.sliderLabel.text = self.upSliderDefaultValue;
+            self.sliderLabel.text = [self.sliderLabel.text stringByAppendingString:@"%"];
+            self.sliderLabel.frame = CGRectMake(10 + horizontalPosition, 15 + 20, 40, 15);
+            
+            [self.profitUpSlider setValue:[self.upSliderDefaultValue integerValue]];
+            self.marginInputTextField.text = self.upSliderDefaultValue;
+            
+            
+            [self.profitDownSlider setValue:self.downSliderDefaultValue.integerValue];
+            self.leftValueLabel.text = [NSString stringWithFormat:@"%ld", self.downSliderDefaultValue.integerValue];
+            self.leftValueLabel.text = [self.leftValueLabel.text stringByAppendingString:@" %"];
+            self.rightValueLabel.text = [NSString stringWithFormat:@"%ld", 100 - self.downSliderDefaultValue.integerValue];
+            self.rightValueLabel.text = [self.rightValueLabel.text stringByAppendingString:@" %"];
+            
+            if ([self.upSwitchDefaultStatu isEqualToString:@"1"]) {
+                
+                [self.recomUpSwitch setOn:YES animated:NO];
+                [self updateUIStyle_ShowUpContentPart];
+                [self showUpContentPart];
+            }
+            else{
+                [self.recomUpSwitch setOn:NO animated:NO];
+                [self updateUIStyle_HideUpContentPart];
+                [self hideUpContentPart];
+                
+            }
+            
+            if ([self.downSwitchDefaultStatu isEqualToString:@"1"]) {
+                
+                [self.recomDownSwitch setOn:YES animated:NO];
+                if (self.recomUpSwitch.on) {
+                    [self updateUIStyle_ShowDownContentPart];
+                }
+                else{
+                    [self updateUIStyle_ShowDownContentPartWithUpSwitchOff];
+                }
+                [self showDownContentPart];
+            }
+            else{
+                
+                [self.recomDownSwitch setOn:NO animated:NO];
+                if (self.recomUpSwitch.on) {
+                    [self updateUIStyle_HideDownContentPart];
+                }
+                else{
+                    [self updateUIStyle_HideDownContentPartWithUpSwitchOff];
+                }
+                [self hideDownContentPart];
+            }
+            
+            // theme select
+            if ([self.defaultTheme isEqualToString:@""] || [self.defaultTheme isEqualToString:@"red"]) {
+                
+                [self.redBtn setBackgroundImage:IMAGE(@"redS.png") forState:UIControlStateNormal];
+                [self.blackBtn setBackgroundImage:IMAGE(@"blackU.png") forState:UIControlStateNormal];
+            }
+            else{
+                [self.blackBtn setBackgroundImage:IMAGE(@"blackS.png") forState:UIControlStateNormal];
+                [self.redBtn setBackgroundImage:IMAGE(@"redU.png") forState:UIControlStateNormal];
+            }
+        }
+        
+        [self.hud hide:YES];
+    }];
+}
+
+
+#pragma mark - Slider Actions
+- (void)profitUpSliderScrollAction:(UISlider *)slider{
+    
+    CGFloat horizontalPosition = slider.value * (slider.frame.size.width / 100.0);
+    self.sliderLabel.frame = CGRectMake(10 + horizontalPosition, 15 + 20, 40, 15);
+
+    NSString *str = [NSString stringWithFormat:@"%f", slider.value];
+    NSInteger value = [str integerValue];
+    self.sliderLabel.text = [NSString stringWithFormat:@"%ld", value];
+    self.sliderLabel.text = [self.sliderLabel.text stringByAppendingString:@"%"];
+    
+    self.marginInputTextField.text = [NSString stringWithFormat:@"%ld", value];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    NSString *regex = @"^[0-9]*$";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    BOOL isValid = [predicate evaluateWithObject:textField.text];
+    
+    if (isValid) {
+        if ((textField.text.integerValue > 0 || textField.text.integerValue == 0) && (textField.text.integerValue < 100 || textField.text.integerValue == 100)) {
+            
+            [self.profitUpSlider setValue:textField.text.integerValue animated:YES];
+            
+            CGFloat horizontalPosition = textField.text.integerValue * (self.profitUpSlider.frame.size.width / 100.0);
+            self.sliderLabel.frame = CGRectMake(10 + horizontalPosition, 15 + 20, 40, 15);
+            
+            self.sliderLabel.text = textField.text;
+            self.sliderLabel.text = [self.sliderLabel.text stringByAppendingString:@"%"];
+        }
+        else{
+            [OMCustomTool OMshowAlertViewWithMessage:@"Please input available value with range!" fromViewController:self];
+        }
+    }
+    else{
+        [OMCustomTool OMshowAlertViewWithMessage:@"You can only input Arabic numerals!" fromViewController:self];
+    }
+}
+
+- (void)profitDownSliderScrollAction:(UISlider *)slider{
+    
+    if (slider.value < 15.0) {
+        [slider setValue:15.0];
+    }
+    
+    NSString *str = [NSString stringWithFormat:@"%f", slider.value];
+    NSInteger value = [str integerValue];
+    
+    self.leftValueLabel.text = [NSString stringWithFormat:@"%ld", value];
+    self.leftValueLabel.text = [self.leftValueLabel.text stringByAppendingString:@" %"];
+    
+    NSInteger rightValue = 100 - value;
+    self.rightValueLabel.text = [NSString stringWithFormat:@"%ld", rightValue];
+    self.rightValueLabel.text = [self.rightValueLabel.text stringByAppendingString:@" %"];
+}
+
+
+#pragma mark - Transmit Parameters - Color Button Part
+- (void)redBtnClickedAction:(UIButton *)btn{
+    
+    [btn setBackgroundImage:IMAGE(@"redS.png") forState:UIControlStateNormal];
+    [self.blackBtn setBackgroundImage:IMAGE(@"blackU.png") forState:UIControlStateNormal];
+    
+    // interface call
+    NSDictionary *paramDic = @{@"id" : [SETTINGs objectForKey:OM_USER_ID],
+                               @"theme" : @"red"
+                               };
+    [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_SHOP_SETTINGS dateBlock:^(id dateBlock) {
+    }];
+}
+
+- (void)blackBtnClickedAction:(UIButton *)btn{
+    
+    [btn setBackgroundImage:IMAGE(@"blackS.png") forState:UIControlStateNormal];
+    [self.redBtn setBackgroundImage:IMAGE(@"redU.png") forState:UIControlStateNormal];
+    
+    // interface call
+    NSDictionary *paramDic = @{@"id" : [SETTINGs objectForKey:OM_USER_ID],
+                               @"theme" : @"black"
+                               };
+    [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_SHOP_SETTINGS dateBlock:^(id dateBlock) {
+    }];
+}
+
+
+#pragma mark - Transmit Parameters - Save Button Part
+- (void)saveBtnClickedAction:(UIButton *)btn{
+    
+    NSString *transStr = [NSString stringWithFormat:@"%f", self.profitUpSlider.value];
+    transStr = [NSString stringWithFormat:@"%ld", (long)[transStr integerValue]];
+    
+    // get value of textfield and transmit to server as parameter
+    NSDictionary *paramDic = @{@"id" : [SETTINGs objectForKey:OM_USER_ID],
+                               @"productProfileRate" :transStr
+                               };
+    [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_SHOP_SETTINGS dateBlock:^(id dateBlock) {
+        
+        [OMCustomTool OMshowAlertViewWithMessage:@"Save Succeed!" fromViewController:self];
+    }];
+}
+
+
+- (void)profitDownSliderDragEnd:(UISlider *)slider{
+    
+    // drag end transmit parameter to server downSlider status
+    
+    NSString *transStr = [NSString stringWithFormat:@"%f", slider.value];
+    transStr = [NSString stringWithFormat:@"%ld", (long)[transStr integerValue]];
+    
+    // get value of textfield and transform to server as parameter
+    NSDictionary *paramDic = @{@"id" : [SETTINGs objectForKey:OM_USER_ID],
+                               @"returnToFansRate" :transStr
+                               };
+    [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_SHOP_SETTINGS dateBlock:^(id dateBlock) {
+        
+        [OMCustomTool OMshowAlertViewWithMessage:@"Save Succeed!" fromViewController:self];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

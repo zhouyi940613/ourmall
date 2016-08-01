@@ -166,17 +166,43 @@
 #pragma mark - OMAPI:  Reds Shop Product Categories List
 #define API_SHOP_PRODUCT_CATEGORIES_LIST [NSString stringWithFormat:@"api.mall.shop.categorylist"]
 
-//// 23
-//#pragma mark - OMAPI: Send JPush Rigister Informations
-//#define API_SEND_JPUSH_RION [NSString stringWithFormat:@"api.mall.member.registdevice"]
-//
-//// 24
-//#pragma mark - OMAPI: Send JPush Rigister Informations
-//#define API_SEND_JPUSH_RION [NSString stringWithFormat:@"api.mall.member.registdevice"]
-//
-//// 25
-//#pragma mark - OMAPI: Send JPush Rigister Informations
-//#define API_SEND_JPUSH_RION [NSString stringWithFormat:@"api.mall.member.registdevice"]
+// 23
+#pragma mark - OMAPI: Reds Shop Product Detail info
+#define API_SHOP_PRODUCT_DETAIL [NSString stringWithFormat:@"api.mall.product.detail"]
+
+// 24
+#pragma mark - OMAPI: Reds Shop Product Categories List
+#define API_SHOP_PRODUCT_CATEGORIES [NSString stringWithFormat:@"api.mall.shop.categorylist"]
+
+// 25
+#pragma mark - OMAPI: Reds Shop Settings Interface
+#define API_SHOP_SETTINGS [NSString stringWithFormat:@"api.mall.shop.setting"]
+
+// 26
+#pragma mark - OMAPI: Reds Shop Product Search
+#define API_SHOP_Product_SearchList [NSString stringWithFormat:@"api.mall.product.find"]
+
+// 27
+#pragma mark - OMAPI: Reds Shop Order Detail
+#define API_SHOP_PRODUCT_ORDER_DETAIL [NSString stringWithFormat:@"api.mall.shop.orderdetail"]
+
+// 28
+#pragma mark - OMAPI: Reds Shop Product Edit
+#define API_SHOP_Product_EDIT [NSString stringWithFormat:@"api.mall.shop.sponsorproductchange"]
+
+// 29
+#pragma mark - OMAPI: Reds Shop Delete Category
+#define API_SHOP_CATEGORY_DELETE [NSString stringWithFormat:@"api.mall.shop.deletecategory"]
+
+// 30
+#pragma mark - OMAPI: Reds Shop Add Category
+#define API_SHOP_CATEGORY_ADD [NSString stringWithFormat:@"api.mall.shop.addcategory"]
+
+// 31
+#pragma mark - OMAPI: Reds Shop Add Product of Category
+#define API_SHOP_PROofCATE_ADD [NSString stringWithFormat:@"api.mall.shop.changecategoryproduct"]
+
+
 
 #pragma mark - OMAPI: API Parameters Keys
 
@@ -194,9 +220,15 @@
 #define OM_USER_FROZENACCOUNT   [NSString stringWithFormat:@"frozenAmount"]
 #define OM_MESSAGE_LIST_CACHE   [NSString stringWithFormat:@"messageList_cache"]
 #define OM_MESSAGE_DETAIL_CACHE [NSString stringWithFormat:@"messageDetail_cache"]
+#define OM_USER_SHOP_STATUS     [NSString stringWithFormat:@"canOpenShop"]
 
+
+#define OMCACHE_SHOP_MOTI_KEY   [NSString stringWithFormat:@"SHOP_MOTIFY_KEY"]
+#define OMCACHE_SHOP_PARAMETER  [NSString stringWithFormat:@"SHOP_PARAMETER"]
+#define OMCACHE_SHOP_CATE_KEY   [NSString stringWithFormat:@"SHOP_CATE_KEY"]
 
 #pragma mark - OMNOTIFICATION: Notification Name
+#define OMBACK_BUTTON_CLICKED  [NSString stringWithFormat:@"BACK_BUTTON_CLICKED"]
 
 #define OMUSER_STATUS_LOGIN    [NSString stringWithFormat:@"USER_IS_LOGGING_IN"]
 #define OMUSER_STATUS_LOGOUT   [NSString stringWithFormat:@"USER_IS_LOGGED_OUT"]
@@ -207,13 +239,38 @@
 #define OMHISTORY_ARRAY        [NSString stringWithFormat:@"HOME_HISTORY_ARRAY"]
 #define OMSEARCH_TIMES         [NSString stringWithFormat:@"OMSEARCH_TIMES"]
 
+#define OMHISTORY_ADD_ARRAY    [NSString stringWithFormat:@"HOME_HISTORY_ADD_ARRAY"]
+#define OMSEARCH_ADD_TIMES     [NSString stringWithFormat:@"OMSEARCH_ADD_TIMES"]
+
+#define OMAPP_ENTER_FOREGROUND [NSString stringWithFormat:@"OMAPP_ENTER_FOREGROUND"]
+
+
+// WEB SOCKET
+#define OMWEBSOCKET_OPEN       [NSString stringWithFormat:@"OMSOCKET_OPEN"]
+#define OMWEBSOCKET_CLOSE      [NSString stringWithFormat:@"OMSOCKET_CLOSE"]
+
 #define OMWEBSOCKT_STATUS      [NSString stringWithFormat:@"OMSOCKET_STATUS"]
+
+#define OMWEBSOCKET_CONNECTED     [NSString stringWithFormat:@"OMSOCKET_CONNECTED"]
+
+#define OMWEBSOCKET_UNREADCOUNT   [NSString stringWithFormat:@"OMSOCKET_UNREADCOUNT"]
+#define OMWEBSOCKET_UNREADCOUNTREQUEST   [NSString stringWithFormat:@"OMSOCKET_UNREADCOUNTREQUEST"]
+
+#define OMWEBSOCKET_SESSIONLIST   [NSString stringWithFormat:@"OMSOCKET_SESSIONLIST"]
+#define OMWEBSOCKET_SESSIONLISTREQUEST   [NSString stringWithFormat:@"OMSOCKET_SESSIONLISTREQUEST"]
+
+#define OMWEBSOCKET_SESSIONDETAIL [NSString stringWithFormat:@"OMSOCKET_SESSIONDETAIL"]
+#define OMWEBSOCKET_SESSIONDETAILREQUEST [NSString stringWithFormat:@"OMSOCKET_SESSIONDETAILREQUEST"]
+#define OMWEBSOCKET_SESSIONDETAIL_NEW [NSString stringWithFormat:@"OMSOCKET_SESSIONDETAIL_NEW"]
+
+#define OMWEBSOCKET_SENDMESSAGE   [NSString stringWithFormat:@"OMSOCKET_SENDMESSAGE"]
+
 
 #pragma mark - CONTACT_URL : Contact us On Url
 
-#define OMCONTACT_FACEBOOK      [NSString stringWithFormat:@"https://facebook.com/ourmallapp"]
+#define OMCONTACT_FACEBOOK      [NSString stringWithFormat:@"https://www.facebook.com/ourmall.co"]
 #define OMCONTACT_TWITTER       [NSString stringWithFormat:@"https://twitter.com/Ourmall_app"]
-#define OMCONTACT_INSTAGRAM     [NSString stringWithFormat:@"https://instagram.com/ourmall_cn"]
+#define OMCONTACT_INSTAGRAM     [NSString stringWithFormat:@"https://www.instagram.com/ourmall_app/"]
 
 #define OMFACEBOOK_LOGIN_SUCCEED    [NSString stringWithFormat:@"facebookLoginSucceedKey"]
 #define OMTWITTER_LOGIN_SUCCEED     [NSString stringWithFormat:@"twitterLoginSucceedKey"]

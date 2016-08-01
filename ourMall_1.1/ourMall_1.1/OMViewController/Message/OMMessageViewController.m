@@ -40,196 +40,82 @@
     self.title = @"Message";
     [self.tableViewMessage registerNib:[UINib nibWithNibName:@"OMMessageCell" bundle:nil] forCellReuseIdentifier:@"OMMessageCell"];
     
-    // socket settings
-    myWebSocket.delegate = nil;
-    [myWebSocket close];
-    
-    myWebSocket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"ws://message.ourmall.com:7272"]]];
-    myWebSocket.delegate = self;
-    [self openWebSocketConnection];
-    
-    [self requireData];
-    
-    // show center loading animation
-    [self.navigationItem startAnimatingAt:ANNavBarLoaderPositionCenter];
-}
-
-#pragma mark - WebSocket Life Cycle
-- (void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:YES];
-    
-    // socket settings
-    myWebSocket.delegate = nil;
-    [myWebSocket close];
+    // websocket settings
+    [NOTIFICATION_SETTING addObserver:self selector:@selector(loadDataWithNotice:) name:OMWEBSOCKET_SESSIONLIST object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+    // loading start
+    [self.navigationItem startAnimatingAt:ANNavBarLoaderPositionCenter];
     
-    // update local file
-    [self requireData];
+    if ([OMCustomTool UserIsLoggingIn]) {
+        
+        [NOTIFICATION_SETTING postNotificationName:OMWEBSOCKET_SESSIONLISTREQUEST object:nil];
+        [NOTIFICATION_SETTING postNotificationName:OMWEBSOCKET_UNREADCOUNTREQUEST object:nil];
+    }
+    else{
+    }
     
+//    NSUserDefaults*pushJudge = [NSUserDefaults standardUserDefaults];
+//    if([[pushJudge objectForKey:@"push"]isEqualToString:@"push"]) {
+//        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"< Back" style:UIBarButtonItemStyleDone target:self action:@selector(rebackToRootViewAction)];
+//    }else{
+//        self.navigationItem.leftBarButtonItem=nil;
+//    }
 }
 
-#pragma mark - Require Data
-- (void)openWebSocketConnection{
-    // open connection
-    [myWebSocket open];
-}
+//- (void)rebackToRootViewAction {
+//    NSUserDefaults * pushJudge = [NSUserDefaults standardUserDefaults];
+//    [pushJudge setObject:@""forKey:@"push"];
+//    [pushJudge synchronize];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//}
 
-- (void)requireData{
+#pragma mark - Load Data With Notification
+- (void)loadDataWithNotice:(NSNotification *)notice{
     
-    // initialize array to prevent load history records
-    self.friendArray = [NSMutableArray array];
+    // stop center loading animation
+    [self.navigationItem stopAnimating];
     
-    // load local cache data
-    NSString *sandBoxPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    NSString *cachePath = [sandBoxPath stringByAppendingString:@"/OMMessageListCache.plist"];
-    NSArray *cacheArray = [NSKeyedUnarchiver unarchiveObjectWithFile:cachePath];
-    
-    if (cacheArray && cacheArray.count > 0) {
+    // 缓存未做
+    if ([notice.userInfo[@"status"] isEqualToString:@"init"]) {
         
-        for (OMFriendListModel *model in cacheArray) {
-            [self.friendArray addObject:model];
-        }
+        NSArray *array = [NSArray arrayWithArray:[notice.userInfo objectForKey:@"sessionList"]];
+        self.friendArray = [OMFriendListModel ModelArr_With_DictionaryArr:array];
         
-        if (![OMCustomTool isEmptyString:[SETTINGs objectForKey:@"lastSession"]]) {
-            
-            for (OMFriendListModel *model in cacheArray) {
-                if ([model.subjectPid isEqualToString:[SETTINGs objectForKey:@"lastSessionID"]]) {
-                    model.lastMessage = [SETTINGs objectForKey:@"lastSession"];
-                    model.myUnReadCnt = @"0";
+        [self.tableViewMessage reloadData];
+    }
+    //
+    else if ([notice.userInfo[@"status"] isEqualToString:@"new"])
+    {
+        // exchange
+        NSArray *array = [NSArray arrayWithArray:[notice.userInfo objectForKey:@"sessionList"]];
+        array = [OMFriendListModel ModelArr_With_DictionaryArr:array];
+        
+        // 副本数组
+        NSMutableArray *tempArr = [NSMutableArray arrayWithArray:self.friendArray];
+        
+        for (OMFriendListModel *newModel in array) {
+            for (OMFriendListModel *oldModel in self.friendArray) {
+                
+                if ([newModel.plus[@"name"] isEqualToString:oldModel.plus[@"name"]]) {
+                    [tempArr removeObject:oldModel];
                 }
             }
             
-            // update cache
-           [NSKeyedArchiver archiveRootObject:cacheArray toFile:cachePath];
-        }
-        else{
-            // last session cache empty
+            self.friendArray = [NSMutableArray arrayWithArray:tempArr];
+            [self.friendArray insertObject:newModel atIndex:0];
         }
         
         [self.tableViewMessage reloadData];
     }
     else{
-        // add loading
-        self.hud = [[MBProgressHUD alloc] init];
-        [self.view addSubview:self.hud];
-        [self.hud hide:YES];
-        
-        self.friendArray = [NSMutableArray array];
-    }
-}
-
-- (void)requireNewData{
-    
-    [self.hud show:YES];
-    
-    if (![OMCustomTool isNullObject:[SETTINGs objectForKey:OM_USER_LOGINKEY]]) {
-        
-        // require data : session list
-        NSDictionary *paramDic = @{@"v" : @"2.0",
-                                   @"ac" : @"init",
-                                   @"loginKey" : [SETTINGs objectForKey:OM_USER_LOGINKEY],
-                                   @"actions" : @[@"getUnRead"],
-                                   @"isSubjectListPage" : @"1"
-                                   };
-        
-        NSData *json = [NSJSONSerialization dataWithJSONObject:paramDic options:0 error:nil];
-        NSString *str = [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
-        [myWebSocket send:str];
-    }
-    else{
-        
-        // longinKey disabled per 4 hours, require loginKey again
-        [SETTINGs removeObjectForKey:OM_USER_LOGINKEY];
-        [SETTINGs synchronize];
-        
-        NSDictionary *paramDic = @{@"memberUid" : [SETTINGs objectForKey:OM_USER_UID]};
-        [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_GET_LOGINKEY dateBlock:^(id dateBlock) {
-            
-            // save new loginkey in local
-            [SETTINGs setObject:dateBlock[@"Data"][@"LoginKey"] forKey:OM_USER_LOGINKEY];
-            [SETTINGs synchronize];
-            
-            // update
-            [self requireNewData];
-        }];
-    }
-}
-
-#pragma mark - WebSocket Connected Succeed & Failed
-- (void)webSocketDidOpen:(SRWebSocket *)webSocket{
-    
-    NSLog(@"WebSocket Require Message Session Lists!");
-    
-    [self requireNewData];
-    
-}
-// connected failed
-- (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error{
-    
-    NSLog(@":( Websocket Failed With Error %@", error);
-    myWebSocket = nil;
-}
-
-#pragma mark - WebSocket Data Return
-- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message{
-    
-    NSString *str = [NSString stringWithFormat:@"%@", message];
-    NSDictionary *dicc = [self dictionaryWithJsonString:str];
-    NSLog(@"Receive Session List : %@", dicc);
-    [self.hud hide:YES];
-    
-    // ping : connected succeed
-    if ([dicc[@"ac"] isEqualToString:@"ping"]) {
-        // empty resolve
-    }
-    // call when new message push
-    else if ([dicc[@"ac"] isEqualToString:@"init"])
-    {
-        // data update
-        if (![dicc[@"getUnRead"][@"subjects"] isKindOfClass:[NSNull class]]) {
-            self.friendArray = [OMFriendListModel ModelArr_With_DictionaryArr:dicc[@"getUnRead"][@"subjects"]];
-            
-            // stop center loading animation
-            [self.navigationItem stopAnimating];
-            
-            [self.tableViewMessage reloadData];
-            
-            // local cache
-            NSArray *cacheArray = [NSArray arrayWithArray:self.friendArray];
-            NSString *sandBoxPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-            NSString *cachePath = [sandBoxPath stringByAppendingString:@"/OMMessageListCache.plist"];
-            
-             NSLog(@"message list cache path : %@", sandBoxPath);
-             NSLog(@"cache list cache path : %@", cachePath);
-            
-            [NSKeyedArchiver archiveRootObject:cacheArray toFile:cachePath];
-        }
-    }
-    // call when loginkey disabled
-    else if ([dicc[@"ac"] isEqualToString:@"logout"]){
-        
-        // longinKey disabled per 4 hours, require loginKey again
-        [SETTINGs removeObjectForKey:OM_USER_LOGINKEY];
-        [SETTINGs synchronize];
-    
-        NSDictionary *paramDic = @{@"memberUid" : [SETTINGs objectForKey:OM_USER_UID]};
-        [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_GET_LOGINKEY dateBlock:^(id dateBlock) {
-            
-            // save new loginkey in local
-            [SETTINGs setObject:dateBlock[@"Data"][@"LoginKey"] forKey:OM_USER_LOGINKEY];
-            [SETTINGs synchronize];
-            
-            // update data
-            [self requireNewData];
-        }];
-    }
-    else{
         // empty
     }
+    
 }
+
 
 #pragma mark - TableView Delegate Method
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -267,6 +153,7 @@
     cell.timeLabel.text = model.lastModifyTime;
     cell.ContentLabel.text = model.lastMessage;
     NSString *bageStr = [NSString stringWithFormat:@"%@", model.myUnReadCnt];
+    
     if ([bageStr integerValue] == 0) {
         cell.bageLabel.hidden = YES;
     }

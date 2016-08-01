@@ -7,6 +7,7 @@
 //
 
 #import "OMProductCell.h"
+#import "OMCustomTool.h"
 
 @implementation OMProductCell
 

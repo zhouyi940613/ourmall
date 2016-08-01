@@ -294,7 +294,9 @@
         
         
     } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-        if (finished) {
+        
+        if (!error) {
+            
             CGFloat imgWidth = image.size.width;
             CGFloat imgHeight = image.size.height;
             
@@ -313,6 +315,7 @@
         else{
             cell.titleImageView.image = IMAGE(@"productPlacer.png");
         }
+        
     }];
     
     cell.titleLabel.text = model.name;

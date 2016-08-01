@@ -13,7 +13,7 @@
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key{
 
     if ([key isEqualToString:@"id"]) {
-        value = self.idValue;
+        self.idValue = value;
     }
 }
 

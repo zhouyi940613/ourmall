@@ -107,6 +107,43 @@
 		69214E5F1CE424F700C18332 /* Note@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 69214E471CE424F700C18332 /* Note@2x.png */; };
 		69214E601CE424F700C18332 /* Note@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 69214E481CE424F700C18332 /* Note@3x.png */; };
 		69214E621CE4260B00C18332 /* bannerIng.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 69214E611CE4260B00C18332 /* bannerIng.jpg */; };
+		6924CDBE1D45B4790068B75E /* OMAddProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6924CDA01D45B4790068B75E /* OMAddProductCell.m */; };
+		6924CDBF1D45B4790068B75E /* OMAddProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDA11D45B4790068B75E /* OMAddProductCell.xib */; };
+		6924CDC01D45B4790068B75E /* OMCategoryProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6924CDA31D45B4790068B75E /* OMCategoryProductCell.m */; };
+		6924CDC11D45B4790068B75E /* OMCategoryProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDA41D45B4790068B75E /* OMCategoryProductCell.xib */; };
+		6924CDC21D45B4790068B75E /* OMCatePerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6924CDA61D45B4790068B75E /* OMCatePerCell.m */; };
+		6924CDC31D45B4790068B75E /* OMCatePerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDA71D45B4790068B75E /* OMCatePerCell.xib */; };
+		6924CDC41D45B4790068B75E /* OMCateSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6924CDA91D45B4790068B75E /* OMCateSearchViewController.m */; };
+		6924CDC51D45B4790068B75E /* OMCateSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDAA1D45B4790068B75E /* OMCateSearchViewController.xib */; };
+		6924CDC61D45B4790068B75E /* OMEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6924CDAC1D45B4790068B75E /* OMEditViewController.m */; };
+		6924CDC71D45B4790068B75E /* OMEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDAD1D45B4790068B75E /* OMEditViewController.xib */; };
+		6924CDC81D45B4790068B75E /* OMProductAtributeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6924CDAF1D45B4790068B75E /* OMProductAtributeCell.m */; };
+		6924CDC91D45B4790068B75E /* OMProductAtributeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDB01D45B4790068B75E /* OMProductAtributeCell.xib */; };
+		6924CDCA1D45B4790068B75E /* OMProductCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6924CDB21D45B4790068B75E /* OMProductCategoryViewController.m */; };
+		6924CDCB1D45B4790068B75E /* OMProductCategoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDB31D45B4790068B75E /* OMProductCategoryViewController.xib */; };
+		6924CDCC1D45B4790068B75E /* OMShopAddProductVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6924CDB51D45B4790068B75E /* OMShopAddProductVC.m */; };
+		6924CDCD1D45B4790068B75E /* OMShopAddProductVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDB61D45B4790068B75E /* OMShopAddProductVC.xib */; };
+		6924CDCE1D45B4790068B75E /* OMShopProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6924CDB81D45B4790068B75E /* OMShopProductCell.m */; };
+		6924CDCF1D45B4790068B75E /* OMShopProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDB91D45B4790068B75E /* OMShopProductCell.xib */; };
+		6924CDD01D45B4790068B75E /* OMShopProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6924CDBB1D45B4790068B75E /* OMShopProductViewController.m */; };
+		6924CDD61D45F60F0068B75E /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDD31D45F60F0068B75E /* delete.png */; };
+		6924CDD71D45F60F0068B75E /* delete@2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDD41D45F60F0068B75E /* delete@2.png */; };
+		6924CDD81D45F60F0068B75E /* delete@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDD51D45F60F0068B75E /* delete@3x.png */; };
+		6924CDDC1D45F7530068B75E /* OMCategoryEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6924CDDA1D45F7530068B75E /* OMCategoryEditCell.m */; };
+		6924CDDD1D45F7530068B75E /* OMCategoryEditCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDDB1D45F7530068B75E /* OMCategoryEditCell.xib */; };
+		6924CDE41D4606CC0068B75E /* addNew.png in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDDE1D4606CC0068B75E /* addNew.png */; };
+		6924CDE51D4606CC0068B75E /* addNew@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDDF1D4606CC0068B75E /* addNew@2x.png */; };
+		6924CDE61D4606CC0068B75E /* addNew@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDE01D4606CC0068B75E /* addNew@3x.png */; };
+		6924CDE71D4606CC0068B75E /* haveAdded.png in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDE11D4606CC0068B75E /* haveAdded.png */; };
+		6924CDE81D4606CC0068B75E /* haveAdded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDE21D4606CC0068B75E /* haveAdded@2x.png */; };
+		6924CDE91D4606CC0068B75E /* haveAdded@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDE31D4606CC0068B75E /* haveAdded@3x.png */; };
+		6924CDF11D475A3A0068B75E /* cart.png in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDEB1D475A3A0068B75E /* cart.png */; };
+		6924CDF21D475A3A0068B75E /* cart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDEC1D475A3A0068B75E /* cart@2x.png */; };
+		6924CDF31D475A3A0068B75E /* cart@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDED1D475A3A0068B75E /* cart@3x.png */; };
+		6924CDF41D475A3A0068B75E /* wallet.png in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDEE1D475A3A0068B75E /* wallet.png */; };
+		6924CDF51D475A3A0068B75E /* wallet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDEF1D475A3A0068B75E /* wallet@2x.png */; };
+		6924CDF61D475A3A0068B75E /* wallet@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6924CDF01D475A3A0068B75E /* wallet@3x.png */; };
+		6924CE371D48F36C0068B75E /* deleteFu.png in Resources */ = {isa = PBXBuildFile; fileRef = 6924CE361D48F36C0068B75E /* deleteFu.png */; };
 		6936D68D1CE99B4100DFB038 /* moren.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6936D68C1CE99B4100DFB038 /* moren.jpg */; };
 		6936D6921CE9A04F00DFB038 /* back_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 6936D68F1CE9A04F00DFB038 /* back_btn.png */; };
 		6936D6931CE9A04F00DFB038 /* back_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6936D6901CE9A04F00DFB038 /* back_btn@2x.png */; };
@@ -196,7 +233,6 @@
 		694F3FF11D39D7A200491C34 /* OMShopSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 694F3FF01D39D7A200491C34 /* OMShopSettingsViewController.m */; };
 		694F3FF51D39D7B300491C34 /* OMShopOrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 694F3FF31D39D7B300491C34 /* OMShopOrdersViewController.m */; };
 		694F3FF61D39D7B300491C34 /* OMShopOrdersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 694F3FF41D39D7B300491C34 /* OMShopOrdersViewController.xib */; };
-		694F3FF91D39D90600491C34 /* OMShopProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 694F3FF81D39D90600491C34 /* OMShopProductViewController.m */; };
 		694F3FFD1D39E74600491C34 /* OMProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 694F3FFB1D39E74600491C34 /* OMProductCell.m */; };
 		694F3FFE1D39E74600491C34 /* OMProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 694F3FFC1D39E74600491C34 /* OMProductCell.xib */; };
 		694F40021D3A047100491C34 /* OMOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 694F40011D3A047100491C34 /* OMOrderModel.m */; };
@@ -215,9 +251,6 @@
 		694F40221D3CCFB000491C34 /* footer_top.png in Resources */ = {isa = PBXBuildFile; fileRef = 694F401F1D3CCFB000491C34 /* footer_top.png */; };
 		694F40231D3CCFB000491C34 /* footer_top@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 694F40201D3CCFB000491C34 /* footer_top@2x.png */; };
 		694F40241D3CCFB000491C34 /* footer_top@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 694F40211D3CCFB000491C34 /* footer_top@3x.png */; };
-		694F40271D3CD7C600491C34 /* OMShopAddProductVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 694F40261D3CD7C600491C34 /* OMShopAddProductVC.m */; };
-		694F402B1D3CE98000491C34 /* OMShopProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 694F40291D3CE98000491C34 /* OMShopProductCell.m */; };
-		694F402C1D3CE98000491C34 /* OMShopProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 694F402A1D3CE98000491C34 /* OMShopProductCell.xib */; };
 		694F402F1D3CF17900491C34 /* OMProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 694F402E1D3CF17900491C34 /* OMProductModel.m */; };
 		694F40321D3CF9E200491C34 /* OMCategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 694F40311D3CF9E200491C34 /* OMCategoryModel.m */; };
 		694F40351D3DB65700491C34 /* LrdOutputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 694F40341D3DB65700491C34 /* LrdOutputView.m */; };
@@ -273,6 +306,8 @@
 		69663A351D2551A200D32DF2 /* shared.png in Resources */ = {isa = PBXBuildFile; fileRef = 69663A2F1D2551A200D32DF2 /* shared.png */; };
 		69663A361D2551A200D32DF2 /* shared@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 69663A301D2551A200D32DF2 /* shared@2x.png */; };
 		69663A371D2551A200D32DF2 /* shared@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 69663A311D2551A200D32DF2 /* shared@3x.png */; };
+		6978634E1D4A395C0084F428 /* OMShopWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6978634C1D4A395C0084F428 /* OMShopWebViewController.m */; };
+		6978634F1D4A395C0084F428 /* OMShopWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6978634D1D4A395C0084F428 /* OMShopWebViewController.xib */; };
 		697A7BAE1CF6C27B00283111 /* logox120-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 697A7BA81CF6C27B00283111 /* logox120-1.png */; };
 		697A7BAF1CF6C27B00283111 /* logox120-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 697A7BA91CF6C27B00283111 /* logox120-2.png */; };
 		697A7BB01CF6C27B00283111 /* logox120.png in Resources */ = {isa = PBXBuildFile; fileRef = 697A7BAA1CF6C27B00283111 /* logox120.png */; };
@@ -288,6 +323,33 @@
 		697A7BC31CF6C45E00283111 /* 引导页x750x1334.png in Resources */ = {isa = PBXBuildFile; fileRef = 697A7BBB1CF6C45E00283111 /* 引导页x750x1334.png */; };
 		697A7BC41CF6C45E00283111 /* 引导页x1242x2208-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 697A7BBC1CF6C45E00283111 /* 引导页x1242x2208-1.png */; };
 		697A7BC51CF6C45E00283111 /* 引导页x1242x2208.png in Resources */ = {isa = PBXBuildFile; fileRef = 697A7BBD1CF6C45E00283111 /* 引导页x1242x2208.png */; };
+		698A52E31D40AAC00034B79D /* OMProductAttributeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 698A52E21D40AAC00034B79D /* OMProductAttributeModel.m */; };
+		698A52F21D40D3D50034B79D /* checkedBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 698A52EE1D40D3D50034B79D /* checkedBox.png */; };
+		698A52F31D40D3D50034B79D /* checkedBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 698A52EF1D40D3D50034B79D /* checkedBox@2x.png */; };
+		698A52F41D40D3D50034B79D /* unCheckBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 698A52F01D40D3D50034B79D /* unCheckBox.png */; };
+		698A52F51D40D3D50034B79D /* unCheckBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 698A52F11D40D3D50034B79D /* unCheckBox@2x.png */; };
+		698A53041D41B0040034B79D /* OMProfitAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 698A53021D41B0040034B79D /* OMProfitAlertViewController.m */; };
+		698A53051D41B0040034B79D /* OMProfitAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 698A53031D41B0040034B79D /* OMProfitAlertViewController.xib */; };
+		698A53091D41CF2B0034B79D /* OMCategoryInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 698A53071D41CF2B0034B79D /* OMCategoryInputViewController.m */; };
+		698A530A1D41CF2B0034B79D /* OMCategoryInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 698A53081D41CF2B0034B79D /* OMCategoryInputViewController.xib */; };
+		698A53511D4310720034B79D /* OMOrderDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 698A53501D4310720034B79D /* OMOrderDetail.m */; };
+		698A535E1D434C970034B79D /* blackS.png in Resources */ = {isa = PBXBuildFile; fileRef = 698A53521D434C970034B79D /* blackS.png */; };
+		698A535F1D434C970034B79D /* blackS@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 698A53531D434C970034B79D /* blackS@2x.png */; };
+		698A53601D434C970034B79D /* blackS@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 698A53541D434C970034B79D /* blackS@3x.png */; };
+		698A53611D434C970034B79D /* blackU.png in Resources */ = {isa = PBXBuildFile; fileRef = 698A53551D434C970034B79D /* blackU.png */; };
+		698A53621D434C970034B79D /* blackU@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 698A53561D434C970034B79D /* blackU@2x.png */; };
+		698A53631D434C970034B79D /* blackU@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 698A53571D434C970034B79D /* blackU@3x.png */; };
+		698A53641D434C970034B79D /* redS.png in Resources */ = {isa = PBXBuildFile; fileRef = 698A53581D434C970034B79D /* redS.png */; };
+		698A53651D434C970034B79D /* redS@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 698A53591D434C970034B79D /* redS@2x.png */; };
+		698A53661D434C970034B79D /* redS@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 698A535A1D434C970034B79D /* redS@3x.png */; };
+		698A53671D434C970034B79D /* redU.png in Resources */ = {isa = PBXBuildFile; fileRef = 698A535B1D434C970034B79D /* redU.png */; };
+		698A53681D434C970034B79D /* redU@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 698A535C1D434C970034B79D /* redU@2x.png */; };
+		698A53691D434C970034B79D /* redU@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 698A535D1D434C970034B79D /* redU@3x.png */; };
+		698A536D1D43549E0034B79D /* OMCategoryUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 698A536B1D43549E0034B79D /* OMCategoryUpdateViewController.m */; };
+		698A536E1D43549E0034B79D /* OMCategoryUpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 698A536C1D43549E0034B79D /* OMCategoryUpdateViewController.xib */; };
+		698A53711D43751A0034B79D /* OMProductDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 698A53701D43751A0034B79D /* OMProductDetail.m */; };
+		69B2CD551D43AFE0007BC8B7 /* OMOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B2CD531D43AFE0007BC8B7 /* OMOrderDetailViewController.m */; };
+		69B2CD561D43AFE0007BC8B7 /* OMOrderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69B2CD541D43AFE0007BC8B7 /* OMOrderDetailViewController.xib */; };
 		69B9E6E01CE43720006D909E /* OMMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B9E6DE1CE43720006D909E /* OMMessageCell.m */; };
 		69B9E6E11CE43720006D909E /* OMMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69B9E6DF1CE43720006D909E /* OMMessageCell.xib */; };
 		69B9E6E51CE45760006D909E /* OMContactusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B9E6E31CE45760006D909E /* OMContactusViewController.m */; };
@@ -495,6 +557,54 @@
 		69214E471CE424F700C18332 /* Note@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Note@2x.png"; sourceTree = "<group>"; };
 		69214E481CE424F700C18332 /* Note@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Note@3x.png"; sourceTree = "<group>"; };
 		69214E611CE4260B00C18332 /* bannerIng.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = bannerIng.jpg; path = ../bannerIng.jpg; sourceTree = "<group>"; };
+		6924CD9F1D45B4790068B75E /* OMAddProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMAddProductCell.h; sourceTree = "<group>"; };
+		6924CDA01D45B4790068B75E /* OMAddProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMAddProductCell.m; sourceTree = "<group>"; };
+		6924CDA11D45B4790068B75E /* OMAddProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OMAddProductCell.xib; sourceTree = "<group>"; };
+		6924CDA21D45B4790068B75E /* OMCategoryProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMCategoryProductCell.h; sourceTree = "<group>"; };
+		6924CDA31D45B4790068B75E /* OMCategoryProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMCategoryProductCell.m; sourceTree = "<group>"; };
+		6924CDA41D45B4790068B75E /* OMCategoryProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OMCategoryProductCell.xib; sourceTree = "<group>"; };
+		6924CDA51D45B4790068B75E /* OMCatePerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMCatePerCell.h; sourceTree = "<group>"; };
+		6924CDA61D45B4790068B75E /* OMCatePerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMCatePerCell.m; sourceTree = "<group>"; };
+		6924CDA71D45B4790068B75E /* OMCatePerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OMCatePerCell.xib; sourceTree = "<group>"; };
+		6924CDA81D45B4790068B75E /* OMCateSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMCateSearchViewController.h; sourceTree = "<group>"; };
+		6924CDA91D45B4790068B75E /* OMCateSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMCateSearchViewController.m; sourceTree = "<group>"; };
+		6924CDAA1D45B4790068B75E /* OMCateSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OMCateSearchViewController.xib; sourceTree = "<group>"; };
+		6924CDAB1D45B4790068B75E /* OMEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMEditViewController.h; sourceTree = "<group>"; };
+		6924CDAC1D45B4790068B75E /* OMEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMEditViewController.m; sourceTree = "<group>"; };
+		6924CDAD1D45B4790068B75E /* OMEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OMEditViewController.xib; sourceTree = "<group>"; };
+		6924CDAE1D45B4790068B75E /* OMProductAtributeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMProductAtributeCell.h; sourceTree = "<group>"; };
+		6924CDAF1D45B4790068B75E /* OMProductAtributeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMProductAtributeCell.m; sourceTree = "<group>"; };
+		6924CDB01D45B4790068B75E /* OMProductAtributeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OMProductAtributeCell.xib; sourceTree = "<group>"; };
+		6924CDB11D45B4790068B75E /* OMProductCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMProductCategoryViewController.h; sourceTree = "<group>"; };
+		6924CDB21D45B4790068B75E /* OMProductCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMProductCategoryViewController.m; sourceTree = "<group>"; };
+		6924CDB31D45B4790068B75E /* OMProductCategoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OMProductCategoryViewController.xib; sourceTree = "<group>"; };
+		6924CDB41D45B4790068B75E /* OMShopAddProductVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMShopAddProductVC.h; sourceTree = "<group>"; };
+		6924CDB51D45B4790068B75E /* OMShopAddProductVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMShopAddProductVC.m; sourceTree = "<group>"; };
+		6924CDB61D45B4790068B75E /* OMShopAddProductVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OMShopAddProductVC.xib; sourceTree = "<group>"; };
+		6924CDB71D45B4790068B75E /* OMShopProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMShopProductCell.h; sourceTree = "<group>"; };
+		6924CDB81D45B4790068B75E /* OMShopProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMShopProductCell.m; sourceTree = "<group>"; };
+		6924CDB91D45B4790068B75E /* OMShopProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OMShopProductCell.xib; sourceTree = "<group>"; };
+		6924CDBA1D45B4790068B75E /* OMShopProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMShopProductViewController.h; sourceTree = "<group>"; };
+		6924CDBB1D45B4790068B75E /* OMShopProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMShopProductViewController.m; sourceTree = "<group>"; };
+		6924CDD31D45F60F0068B75E /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
+		6924CDD41D45F60F0068B75E /* delete@2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2.png"; sourceTree = "<group>"; };
+		6924CDD51D45F60F0068B75E /* delete@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@3x.png"; sourceTree = "<group>"; };
+		6924CDD91D45F7530068B75E /* OMCategoryEditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMCategoryEditCell.h; sourceTree = "<group>"; };
+		6924CDDA1D45F7530068B75E /* OMCategoryEditCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMCategoryEditCell.m; sourceTree = "<group>"; };
+		6924CDDB1D45F7530068B75E /* OMCategoryEditCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OMCategoryEditCell.xib; sourceTree = "<group>"; };
+		6924CDDE1D4606CC0068B75E /* addNew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addNew.png; sourceTree = "<group>"; };
+		6924CDDF1D4606CC0068B75E /* addNew@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addNew@2x.png"; sourceTree = "<group>"; };
+		6924CDE01D4606CC0068B75E /* addNew@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addNew@3x.png"; sourceTree = "<group>"; };
+		6924CDE11D4606CC0068B75E /* haveAdded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = haveAdded.png; sourceTree = "<group>"; };
+		6924CDE21D4606CC0068B75E /* haveAdded@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haveAdded@2x.png"; sourceTree = "<group>"; };
+		6924CDE31D4606CC0068B75E /* haveAdded@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haveAdded@3x.png"; sourceTree = "<group>"; };
+		6924CDEB1D475A3A0068B75E /* cart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cart.png; sourceTree = "<group>"; };
+		6924CDEC1D475A3A0068B75E /* cart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cart@2x.png"; sourceTree = "<group>"; };
+		6924CDED1D475A3A0068B75E /* cart@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cart@3x.png"; sourceTree = "<group>"; };
+		6924CDEE1D475A3A0068B75E /* wallet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wallet.png; sourceTree = "<group>"; };
+		6924CDEF1D475A3A0068B75E /* wallet@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wallet@2x.png"; sourceTree = "<group>"; };
+		6924CDF01D475A3A0068B75E /* wallet@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wallet@3x.png"; sourceTree = "<group>"; };
+		6924CE361D48F36C0068B75E /* deleteFu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deleteFu.png; sourceTree = "<group>"; };
 		6936D68C1CE99B4100DFB038 /* moren.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = moren.jpg; sourceTree = "<group>"; };
 		6936D68F1CE9A04F00DFB038 /* back_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_btn.png; sourceTree = "<group>"; };
 		6936D6901CE9A04F00DFB038 /* back_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_btn@2x.png"; sourceTree = "<group>"; };
@@ -591,8 +701,6 @@
 		694F3FF21D39D7B300491C34 /* OMShopOrdersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMShopOrdersViewController.h; sourceTree = "<group>"; };
 		694F3FF31D39D7B300491C34 /* OMShopOrdersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMShopOrdersViewController.m; sourceTree = "<group>"; };
 		694F3FF41D39D7B300491C34 /* OMShopOrdersViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OMShopOrdersViewController.xib; sourceTree = "<group>"; };
-		694F3FF71D39D90600491C34 /* OMShopProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMShopProductViewController.h; sourceTree = "<group>"; };
-		694F3FF81D39D90600491C34 /* OMShopProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMShopProductViewController.m; sourceTree = "<group>"; };
 		694F3FFA1D39E74600491C34 /* OMProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMProductCell.h; sourceTree = "<group>"; };
 		694F3FFB1D39E74600491C34 /* OMProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMProductCell.m; sourceTree = "<group>"; };
 		694F3FFC1D39E74600491C34 /* OMProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OMProductCell.xib; sourceTree = "<group>"; };
@@ -613,11 +721,6 @@
 		694F401F1D3CCFB000491C34 /* footer_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = footer_top.png; sourceTree = "<group>"; };
 		694F40201D3CCFB000491C34 /* footer_top@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "footer_top@2x.png"; sourceTree = "<group>"; };
 		694F40211D3CCFB000491C34 /* footer_top@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "footer_top@3x.png"; sourceTree = "<group>"; };
-		694F40251D3CD7C600491C34 /* OMShopAddProductVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMShopAddProductVC.h; sourceTree = "<group>"; };
-		694F40261D3CD7C600491C34 /* OMShopAddProductVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMShopAddProductVC.m; sourceTree = "<group>"; };
-		694F40281D3CE98000491C34 /* OMShopProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMShopProductCell.h; sourceTree = "<group>"; };
-		694F40291D3CE98000491C34 /* OMShopProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMShopProductCell.m; sourceTree = "<group>"; };
-		694F402A1D3CE98000491C34 /* OMShopProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OMShopProductCell.xib; sourceTree = "<group>"; };
 		694F402D1D3CF17900491C34 /* OMProductModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMProductModel.h; sourceTree = "<group>"; };
 		694F402E1D3CF17900491C34 /* OMProductModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMProductModel.m; sourceTree = "<group>"; };
 		694F40301D3CF9E200491C34 /* OMCategoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMCategoryModel.h; sourceTree = "<group>"; };
@@ -681,6 +784,9 @@
 		69663A2F1D2551A200D32DF2 /* shared.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shared.png; sourceTree = "<group>"; };
 		69663A301D2551A200D32DF2 /* shared@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shared@2x.png"; sourceTree = "<group>"; };
 		69663A311D2551A200D32DF2 /* shared@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shared@3x.png"; sourceTree = "<group>"; };
+		6978634B1D4A395C0084F428 /* OMShopWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMShopWebViewController.h; sourceTree = "<group>"; };
+		6978634C1D4A395C0084F428 /* OMShopWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMShopWebViewController.m; sourceTree = "<group>"; };
+		6978634D1D4A395C0084F428 /* OMShopWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OMShopWebViewController.xib; sourceTree = "<group>"; };
 		697A7BA81CF6C27B00283111 /* logox120-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logox120-1.png"; sourceTree = "<group>"; };
 		697A7BA91CF6C27B00283111 /* logox120-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logox120-2.png"; sourceTree = "<group>"; };
 		697A7BAA1CF6C27B00283111 /* logox120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logox120.png; sourceTree = "<group>"; };
@@ -696,6 +802,40 @@
 		697A7BBB1CF6C45E00283111 /* 引导页x750x1334.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "引导页x750x1334.png"; sourceTree = "<group>"; };
 		697A7BBC1CF6C45E00283111 /* 引导页x1242x2208-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "引导页x1242x2208-1.png"; sourceTree = "<group>"; };
 		697A7BBD1CF6C45E00283111 /* 引导页x1242x2208.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "引导页x1242x2208.png"; sourceTree = "<group>"; };
+		698A52E11D40AAC00034B79D /* OMProductAttributeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMProductAttributeModel.h; sourceTree = "<group>"; };
+		698A52E21D40AAC00034B79D /* OMProductAttributeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMProductAttributeModel.m; sourceTree = "<group>"; };
+		698A52EE1D40D3D50034B79D /* checkedBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkedBox.png; sourceTree = "<group>"; };
+		698A52EF1D40D3D50034B79D /* checkedBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkedBox@2x.png"; sourceTree = "<group>"; };
+		698A52F01D40D3D50034B79D /* unCheckBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unCheckBox.png; sourceTree = "<group>"; };
+		698A52F11D40D3D50034B79D /* unCheckBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unCheckBox@2x.png"; sourceTree = "<group>"; };
+		698A53011D41B0040034B79D /* OMProfitAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OMProfitAlertViewController.h; path = ../Others/OMProfitAlertViewController.h; sourceTree = "<group>"; };
+		698A53021D41B0040034B79D /* OMProfitAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OMProfitAlertViewController.m; path = ../Others/OMProfitAlertViewController.m; sourceTree = "<group>"; };
+		698A53031D41B0040034B79D /* OMProfitAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OMProfitAlertViewController.xib; path = ../Others/OMProfitAlertViewController.xib; sourceTree = "<group>"; };
+		698A53061D41CF2B0034B79D /* OMCategoryInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OMCategoryInputViewController.h; path = ../Others/OMCategoryInputViewController.h; sourceTree = "<group>"; };
+		698A53071D41CF2B0034B79D /* OMCategoryInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OMCategoryInputViewController.m; path = ../Others/OMCategoryInputViewController.m; sourceTree = "<group>"; };
+		698A53081D41CF2B0034B79D /* OMCategoryInputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OMCategoryInputViewController.xib; path = ../Others/OMCategoryInputViewController.xib; sourceTree = "<group>"; };
+		698A534F1D4310720034B79D /* OMOrderDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMOrderDetail.h; sourceTree = "<group>"; };
+		698A53501D4310720034B79D /* OMOrderDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMOrderDetail.m; sourceTree = "<group>"; };
+		698A53521D434C970034B79D /* blackS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackS.png; sourceTree = "<group>"; };
+		698A53531D434C970034B79D /* blackS@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackS@2x.png"; sourceTree = "<group>"; };
+		698A53541D434C970034B79D /* blackS@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackS@3x.png"; sourceTree = "<group>"; };
+		698A53551D434C970034B79D /* blackU.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackU.png; sourceTree = "<group>"; };
+		698A53561D434C970034B79D /* blackU@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackU@2x.png"; sourceTree = "<group>"; };
+		698A53571D434C970034B79D /* blackU@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackU@3x.png"; sourceTree = "<group>"; };
+		698A53581D434C970034B79D /* redS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redS.png; sourceTree = "<group>"; };
+		698A53591D434C970034B79D /* redS@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redS@2x.png"; sourceTree = "<group>"; };
+		698A535A1D434C970034B79D /* redS@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redS@3x.png"; sourceTree = "<group>"; };
+		698A535B1D434C970034B79D /* redU.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redU.png; sourceTree = "<group>"; };
+		698A535C1D434C970034B79D /* redU@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redU@2x.png"; sourceTree = "<group>"; };
+		698A535D1D434C970034B79D /* redU@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redU@3x.png"; sourceTree = "<group>"; };
+		698A536A1D43549E0034B79D /* OMCategoryUpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OMCategoryUpdateViewController.h; path = ../Others/OMCategoryUpdateViewController.h; sourceTree = "<group>"; };
+		698A536B1D43549E0034B79D /* OMCategoryUpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OMCategoryUpdateViewController.m; path = ../Others/OMCategoryUpdateViewController.m; sourceTree = "<group>"; };
+		698A536C1D43549E0034B79D /* OMCategoryUpdateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OMCategoryUpdateViewController.xib; path = ../Others/OMCategoryUpdateViewController.xib; sourceTree = "<group>"; };
+		698A536F1D43751A0034B79D /* OMProductDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMProductDetail.h; sourceTree = "<group>"; };
+		698A53701D43751A0034B79D /* OMProductDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMProductDetail.m; sourceTree = "<group>"; };
+		69B2CD521D43AFE0007BC8B7 /* OMOrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMOrderDetailViewController.h; sourceTree = "<group>"; };
+		69B2CD531D43AFE0007BC8B7 /* OMOrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMOrderDetailViewController.m; sourceTree = "<group>"; };
+		69B2CD541D43AFE0007BC8B7 /* OMOrderDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OMOrderDetailViewController.xib; sourceTree = "<group>"; };
 		69B9E6DD1CE43720006D909E /* OMMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMMessageCell.h; sourceTree = "<group>"; };
 		69B9E6DE1CE43720006D909E /* OMMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMMessageCell.m; sourceTree = "<group>"; };
 		69B9E6DF1CE43720006D909E /* OMMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OMMessageCell.xib; sourceTree = "<group>"; };
@@ -1366,6 +1506,110 @@
 			path = Tab_imgs;
 			sourceTree = "<group>";
 		};
+		6924CD961D45B30B0068B75E /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				694F3FEF1D39D7A200491C34 /* OMShopSettingsViewController.h */,
+				694F3FF01D39D7A200491C34 /* OMShopSettingsViewController.m */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		6924CD971D45B3140068B75E /* Orders */ = {
+			isa = PBXGroup;
+			children = (
+				694F3FF21D39D7B300491C34 /* OMShopOrdersViewController.h */,
+				694F3FF31D39D7B300491C34 /* OMShopOrdersViewController.m */,
+				694F3FF41D39D7B300491C34 /* OMShopOrdersViewController.xib */,
+				69B2CD521D43AFE0007BC8B7 /* OMOrderDetailViewController.h */,
+				69B2CD531D43AFE0007BC8B7 /* OMOrderDetailViewController.m */,
+				69B2CD541D43AFE0007BC8B7 /* OMOrderDetailViewController.xib */,
+				694F3FFA1D39E74600491C34 /* OMProductCell.h */,
+				694F3FFB1D39E74600491C34 /* OMProductCell.m */,
+				694F3FFC1D39E74600491C34 /* OMProductCell.xib */,
+			);
+			name = Orders;
+			sourceTree = "<group>";
+		};
+		6924CD9C1D45B4480068B75E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6924CD9D1D45B4520068B75E /* Level 1 */,
+				6924CD9E1D45B45B0068B75E /* Level 2 */,
+				6924CDD21D45B87B0068B75E /* Level 3 */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6924CD9D1D45B4520068B75E /* Level 1 */ = {
+			isa = PBXGroup;
+			children = (
+				6924CDBA1D45B4790068B75E /* OMShopProductViewController.h */,
+				6924CDBB1D45B4790068B75E /* OMShopProductViewController.m */,
+				6924CDD91D45F7530068B75E /* OMCategoryEditCell.h */,
+				6924CDDA1D45F7530068B75E /* OMCategoryEditCell.m */,
+				6924CDDB1D45F7530068B75E /* OMCategoryEditCell.xib */,
+				6924CDB71D45B4790068B75E /* OMShopProductCell.h */,
+				6924CDB81D45B4790068B75E /* OMShopProductCell.m */,
+				6924CDB91D45B4790068B75E /* OMShopProductCell.xib */,
+			);
+			name = "Level 1";
+			sourceTree = "<group>";
+		};
+		6924CD9E1D45B45B0068B75E /* Level 2 */ = {
+			isa = PBXGroup;
+			children = (
+				6924CDAB1D45B4790068B75E /* OMEditViewController.h */,
+				6924CDAC1D45B4790068B75E /* OMEditViewController.m */,
+				6924CDAD1D45B4790068B75E /* OMEditViewController.xib */,
+				6924CDAE1D45B4790068B75E /* OMProductAtributeCell.h */,
+				6924CDAF1D45B4790068B75E /* OMProductAtributeCell.m */,
+				6924CDB01D45B4790068B75E /* OMProductAtributeCell.xib */,
+				6924CDB11D45B4790068B75E /* OMProductCategoryViewController.h */,
+				6924CDB21D45B4790068B75E /* OMProductCategoryViewController.m */,
+				6924CDB31D45B4790068B75E /* OMProductCategoryViewController.xib */,
+				6924CDA51D45B4790068B75E /* OMCatePerCell.h */,
+				6924CDA61D45B4790068B75E /* OMCatePerCell.m */,
+				6924CDA71D45B4790068B75E /* OMCatePerCell.xib */,
+			);
+			name = "Level 2";
+			sourceTree = "<group>";
+		};
+		6924CDD21D45B87B0068B75E /* Level 3 */ = {
+			isa = PBXGroup;
+			children = (
+				6924CDB41D45B4790068B75E /* OMShopAddProductVC.h */,
+				6924CDB51D45B4790068B75E /* OMShopAddProductVC.m */,
+				6924CDB61D45B4790068B75E /* OMShopAddProductVC.xib */,
+				6924CD9F1D45B4790068B75E /* OMAddProductCell.h */,
+				6924CDA01D45B4790068B75E /* OMAddProductCell.m */,
+				6924CDA11D45B4790068B75E /* OMAddProductCell.xib */,
+				6924CDA81D45B4790068B75E /* OMCateSearchViewController.h */,
+				6924CDA91D45B4790068B75E /* OMCateSearchViewController.m */,
+				6924CDAA1D45B4790068B75E /* OMCateSearchViewController.xib */,
+				6924CDA21D45B4790068B75E /* OMCategoryProductCell.h */,
+				6924CDA31D45B4790068B75E /* OMCategoryProductCell.m */,
+				6924CDA41D45B4790068B75E /* OMCategoryProductCell.xib */,
+			);
+			name = "Level 3";
+			sourceTree = "<group>";
+		};
+		6924CDEA1D472F7A0068B75E /* LittleView */ = {
+			isa = PBXGroup;
+			children = (
+				698A53011D41B0040034B79D /* OMProfitAlertViewController.h */,
+				698A53021D41B0040034B79D /* OMProfitAlertViewController.m */,
+				698A53031D41B0040034B79D /* OMProfitAlertViewController.xib */,
+				698A53061D41CF2B0034B79D /* OMCategoryInputViewController.h */,
+				698A53071D41CF2B0034B79D /* OMCategoryInputViewController.m */,
+				698A53081D41CF2B0034B79D /* OMCategoryInputViewController.xib */,
+				698A536A1D43549E0034B79D /* OMCategoryUpdateViewController.h */,
+				698A536B1D43549E0034B79D /* OMCategoryUpdateViewController.m */,
+				698A536C1D43549E0034B79D /* OMCategoryUpdateViewController.xib */,
+			);
+			name = LittleView;
+			sourceTree = "<group>";
+		};
 		6936D68E1CE9A04F00DFB038 /* SystemPart */ = {
 			isa = PBXGroup;
 			children = (
@@ -1486,21 +1730,13 @@
 				694F3FEA1D390F3100491C34 /* OMShopViewController.h */,
 				694F3FEB1D390F3100491C34 /* OMShopViewController.m */,
 				694F3FEC1D390F3100491C34 /* OMShopViewController.xib */,
-				694F3FEF1D39D7A200491C34 /* OMShopSettingsViewController.h */,
-				694F3FF01D39D7A200491C34 /* OMShopSettingsViewController.m */,
-				694F3FF21D39D7B300491C34 /* OMShopOrdersViewController.h */,
-				694F3FF31D39D7B300491C34 /* OMShopOrdersViewController.m */,
-				694F3FF41D39D7B300491C34 /* OMShopOrdersViewController.xib */,
-				694F3FFA1D39E74600491C34 /* OMProductCell.h */,
-				694F3FFB1D39E74600491C34 /* OMProductCell.m */,
-				694F3FFC1D39E74600491C34 /* OMProductCell.xib */,
-				694F3FF71D39D90600491C34 /* OMShopProductViewController.h */,
-				694F3FF81D39D90600491C34 /* OMShopProductViewController.m */,
-				694F40281D3CE98000491C34 /* OMShopProductCell.h */,
-				694F40291D3CE98000491C34 /* OMShopProductCell.m */,
-				694F402A1D3CE98000491C34 /* OMShopProductCell.xib */,
-				694F40251D3CD7C600491C34 /* OMShopAddProductVC.h */,
-				694F40261D3CD7C600491C34 /* OMShopAddProductVC.m */,
+				6978634B1D4A395C0084F428 /* OMShopWebViewController.h */,
+				6978634C1D4A395C0084F428 /* OMShopWebViewController.m */,
+				6978634D1D4A395C0084F428 /* OMShopWebViewController.xib */,
+				6924CD9C1D45B4480068B75E /* Products */,
+				6924CD971D45B3140068B75E /* Orders */,
+				6924CD961D45B30B0068B75E /* Settings */,
+				6924CDEA1D472F7A0068B75E /* LittleView */,
 			);
 			path = MyShop;
 			sourceTree = "<group>";
@@ -1510,10 +1746,16 @@
 			children = (
 				694F40001D3A047100491C34 /* OMOrderModel.h */,
 				694F40011D3A047100491C34 /* OMOrderModel.m */,
+				698A534F1D4310720034B79D /* OMOrderDetail.h */,
+				698A53501D4310720034B79D /* OMOrderDetail.m */,
 				694F402D1D3CF17900491C34 /* OMProductModel.h */,
 				694F402E1D3CF17900491C34 /* OMProductModel.m */,
 				694F40301D3CF9E200491C34 /* OMCategoryModel.h */,
 				694F40311D3CF9E200491C34 /* OMCategoryModel.m */,
+				698A52E11D40AAC00034B79D /* OMProductAttributeModel.h */,
+				698A52E21D40AAC00034B79D /* OMProductAttributeModel.m */,
+				698A536F1D43751A0034B79D /* OMProductDetail.h */,
+				698A53701D43751A0034B79D /* OMProductDetail.m */,
 			);
 			path = Shop;
 			sourceTree = "<group>";
@@ -1521,6 +1763,38 @@
 		694F40031D3C856A00491C34 /* Shop */ = {
 			isa = PBXGroup;
 			children = (
+				6924CE361D48F36C0068B75E /* deleteFu.png */,
+				6924CDEB1D475A3A0068B75E /* cart.png */,
+				6924CDEC1D475A3A0068B75E /* cart@2x.png */,
+				6924CDED1D475A3A0068B75E /* cart@3x.png */,
+				6924CDEE1D475A3A0068B75E /* wallet.png */,
+				6924CDEF1D475A3A0068B75E /* wallet@2x.png */,
+				6924CDF01D475A3A0068B75E /* wallet@3x.png */,
+				6924CDDE1D4606CC0068B75E /* addNew.png */,
+				6924CDDF1D4606CC0068B75E /* addNew@2x.png */,
+				6924CDE01D4606CC0068B75E /* addNew@3x.png */,
+				6924CDE11D4606CC0068B75E /* haveAdded.png */,
+				6924CDE21D4606CC0068B75E /* haveAdded@2x.png */,
+				6924CDE31D4606CC0068B75E /* haveAdded@3x.png */,
+				6924CDD31D45F60F0068B75E /* delete.png */,
+				6924CDD41D45F60F0068B75E /* delete@2.png */,
+				6924CDD51D45F60F0068B75E /* delete@3x.png */,
+				698A53521D434C970034B79D /* blackS.png */,
+				698A53531D434C970034B79D /* blackS@2x.png */,
+				698A53541D434C970034B79D /* blackS@3x.png */,
+				698A53551D434C970034B79D /* blackU.png */,
+				698A53561D434C970034B79D /* blackU@2x.png */,
+				698A53571D434C970034B79D /* blackU@3x.png */,
+				698A53581D434C970034B79D /* redS.png */,
+				698A53591D434C970034B79D /* redS@2x.png */,
+				698A535A1D434C970034B79D /* redS@3x.png */,
+				698A535B1D434C970034B79D /* redU.png */,
+				698A535C1D434C970034B79D /* redU@2x.png */,
+				698A535D1D434C970034B79D /* redU@3x.png */,
+				698A52EE1D40D3D50034B79D /* checkedBox.png */,
+				698A52EF1D40D3D50034B79D /* checkedBox@2x.png */,
+				698A52F01D40D3D50034B79D /* unCheckBox.png */,
+				698A52F11D40D3D50034B79D /* unCheckBox@2x.png */,
 				694F40421D3E186500491C34 /* autoFill.png */,
 				694F40431D3E186500491C34 /* autoFill@2x.png */,
 				694F40441D3E186500491C34 /* autoFill@3x.png */,
@@ -1711,6 +1985,7 @@
 				69214E531CE424F700C18332 /* Male-User@2x.png in Resources */,
 				69663A0A1D1CDAF700D32DF2 /* homeStyleMini.png in Resources */,
 				69167B591CE97CC900EFBF40 /* Friends@2x.png in Resources */,
+				6924CDC91D45B4790068B75E /* OMProductAtributeCell.xib in Resources */,
 				6936D6A01CE9A62A00DFB038 /* userIcon@3x.png in Resources */,
 				69FFA4BC1D013B71009001EF /* f.png in Resources */,
 				694F406A1D3E186500491C34 /* tag@2x.png in Resources */,
@@ -1720,6 +1995,7 @@
 				69167B651CE9906F00EFBF40 /* Note.png in Resources */,
 				697A7BB11CF6C27B00283111 /* logox180-1.png in Resources */,
 				6936D6CF1CE9B15400DFB038 /* twbgimg.png in Resources */,
+				698A53621D434C970034B79D /* blackU@2x.png in Resources */,
 				69663A171D1CE50800D32DF2 /* search@2x.png in Resources */,
 				69D020C11CF29C87008D630E /* f-f@3x.png in Resources */,
 				694F3F911D3371A000491C34 /* SenderAppNodeBkg_HL@2x.png in Resources */,
@@ -1727,12 +2003,15 @@
 				697A7BAE1CF6C27B00283111 /* logox120-1.png in Resources */,
 				69D020C21CF29C87008D630E /* t-f.png in Resources */,
 				69167B521CE97B1B00EFBF40 /* Apply.png in Resources */,
+				698A53671D434C970034B79D /* redU.png in Resources */,
 				694F3F9E1D38950100491C34 /* user-bg.png in Resources */,
+				6924CDE91D4606CC0068B75E /* haveAdded@3x.png in Resources */,
 				6936D7131CE9D07700DFB038 /* nextImg@3x.png in Resources */,
 				694F3FA01D38950100491C34 /* user-bg@3x.png in Resources */,
 				697A7BC11CF6C45E00283111 /* 引导页x640x1136.png in Resources */,
 				697A7BC01CF6C45E00283111 /* 引导页x640x1136-1.png in Resources */,
 				6936D7231CEAA40900DFB038 /* save.png in Resources */,
+				6924CDD81D45F60F0068B75E /* delete@3x.png in Resources */,
 				69663A0C1D1CDAF700D32DF2 /* homeStyleMini@3x.png in Resources */,
 				6936D6C01CE9ABD700DFB038 /* LogoDesc.png in Resources */,
 				69B9E6FF1CE480F2006D909E /* OMAccountDetailCell.xib in Resources */,
@@ -1742,11 +2021,14 @@
 				69167AB01CE49D7D00EFBF40 /* OMAuthorityDetailViewController.xib in Resources */,
 				69D020B51CF24FF1008D630E /* OMSelectItemCell.xib in Resources */,
 				694F403F1D3E178E00491C34 /* shop.png in Resources */,
+				6924CDE61D4606CC0068B75E /* addNew@3x.png in Resources */,
 				69663A371D2551A200D32DF2 /* shared@3x.png in Resources */,
 				6936D72A1CEAA49B00DFB038 /* close@2x.png in Resources */,
 				69FFA4711CFF18BA009001EF /* NOFOUND.png in Resources */,
+				6924CDD61D45F60F0068B75E /* delete.png in Resources */,
 				69FFA4C11D013B71009001EF /* t@3x.png in Resources */,
 				69214E501CE424F700C18332 /* Male-User-hover@2x.png in Resources */,
+				6924CDC51D45B4790068B75E /* OMCateSearchViewController.xib in Resources */,
 				691169251CEC6330003E4316 /* Logout@3x.png in Resources */,
 				6911692F1CED9052003E4316 /* OMApplyAlertViewController.xib in Resources */,
 				697A7BC41CF6C45E00283111 /* 引导页x1242x2208-1.png in Resources */,
@@ -1759,8 +2041,10 @@
 				694F40241D3CCFB000491C34 /* footer_top@3x.png in Resources */,
 				69214E081CE41EF100C18332 /* OMVisitorViewController.xib in Resources */,
 				6936D6A61CE9A6AB00DFB038 /* Please-login@3x.png in Resources */,
+				6924CDC11D45B4790068B75E /* OMCategoryProductCell.xib in Resources */,
 				694F40101D3C856B00491C34 /* ShopMy.png in Resources */,
 				690A184E1CF80A83002FA467 /* logox120@3x.png in Resources */,
+				6924CDF61D475A3A0068B75E /* wallet@3x.png in Resources */,
 				69167B541CE97B1B00EFBF40 /* Apply@3x.png in Resources */,
 				6936D6C21CE9ABD700DFB038 /* LogoDesc2x.png in Resources */,
 				6936D73C1CEAB96900DFB038 /* loading_3.png in Resources */,
@@ -1770,7 +2054,9 @@
 				69214DB61CE36E5E00C18332 /* OMAccountsViewController.xib in Resources */,
 				694F3F921D3371A000491C34 /* sendMsg.png in Resources */,
 				6936D7091CE9CC7800DFB038 /* share-it-xq@2x.png in Resources */,
+				698A53051D41B0040034B79D /* OMProfitAlertViewController.xib in Resources */,
 				69B9E6F51CE4761E006D909E /* OMBalanceCell.xib in Resources */,
+				698A53641D434C970034B79D /* redS.png in Resources */,
 				694F40651D3E186500491C34 /* menu@3x.png in Resources */,
 				694F40631D3E186500491C34 /* menu.png in Resources */,
 				6936D70A1CE9CC7800DFB038 /* share-it-xq@3x.png in Resources */,
@@ -1784,8 +2070,8 @@
 				69167AA61CE4922C00EFBF40 /* OMAuthorizedAccountCell.xib in Resources */,
 				690A184D1CF80A83002FA467 /* logox120@2x.png in Resources */,
 				694F3FEE1D390F3100491C34 /* OMShopViewController.xib in Resources */,
+				698A52F41D40D3D50034B79D /* unCheckBox.png in Resources */,
 				69214E591CE424F700C18332 /* Message@2x.png in Resources */,
-				694F402C1D3CE98000491C34 /* OMShopProductCell.xib in Resources */,
 				6936D6F01CE9C2B800DFB038 /* facebook-buton.png in Resources */,
 				694F3F901D3371A000491C34 /* SenderAppNodeBkg_HL.png in Resources */,
 				694F40641D3E186500491C34 /* menu@2x.png in Resources */,
@@ -1796,12 +2082,14 @@
 				6936D6D01CE9B15400DFB038 /* twbgimg@2x.png in Resources */,
 				6936D7291CEAA49B00DFB038 /* close.png in Resources */,
 				69214DA71CE36E2B00C18332 /* OMHomeViewController.xib in Resources */,
+				6924CDBF1D45B4790068B75E /* OMAddProductCell.xib in Resources */,
 				69C2CB381CFC5E5400604BB4 /* OMCompletedViewController.xib in Resources */,
 				69663A341D2551A200D32DF2 /* noShare@3x.png in Resources */,
 				691169401CED9990003E4316 /* share-it-rw@2x.png in Resources */,
 				6936D69A1CE9A42E00DFB038 /* +-New-Account@3x.png in Resources */,
 				6936D6E11CE9BC4100DFB038 /* downDir.png in Resources */,
 				69663A081D1CDAF700D32DF2 /* homeStyleLarge@2x.png in Resources */,
+				69B2CD561D43AFE0007BC8B7 /* OMOrderDetailViewController.xib in Resources */,
 				694F40661D3E186500491C34 /* selected.png in Resources */,
 				69214E4F1CE424F700C18332 /* Male-User-hover.png in Resources */,
 				6936D6981CE9A42E00DFB038 /* +-New-Account.png in Resources */,
@@ -1814,14 +2102,19 @@
 				694F40161D3C856B00491C34 /* ShopPorduct.png in Resources */,
 				69663A151D1CE50800D32DF2 /* homeSearch@3x.png in Resources */,
 				69167B4A1CE97AD800EFBF40 /* p@2x.png in Resources */,
+				6924CDF41D475A3A0068B75E /* wallet.png in Resources */,
 				69B9E7041CE48862006D909E /* OMWithdrawViewController.xib in Resources */,
+				698A53601D434C970034B79D /* blackS@3x.png in Resources */,
 				69D020BF1CF29C87008D630E /* f-f.png in Resources */,
+				698A53611D434C970034B79D /* blackU.png in Resources */,
+				698A53651D434C970034B79D /* redS@2x.png in Resources */,
 				69167B491CE97AD800EFBF40 /* p.png in Resources */,
 				6936D6F21CE9C2B800DFB038 /* facebook-buton@3x.png in Resources */,
 				6936D6F51CE9C2B800DFB038 /* Instagram@3x.png in Resources */,
 				697A7BAF1CF6C27B00283111 /* logox120-2.png in Resources */,
 				694F403C1D3E178E00491C34 /* shop-hover.png in Resources */,
 				694F40401D3E178E00491C34 /* shop@2x.png in Resources */,
+				6924CDF21D475A3A0068B75E /* cart@2x.png in Resources */,
 				69C2CB481CFDB54400604BB4 /* omnext.png in Resources */,
 				6936D7181CE9D46100DFB038 /* OMAuthorityDetailCell.xib in Resources */,
 				69FFA4C01D013B71009001EF /* t@2x.png in Resources */,
@@ -1840,14 +2133,17 @@
 				6936D6FC1CE9CA9E00DFB038 /* Friends-xq.png in Resources */,
 				69214E521CE424F700C18332 /* Male-User.png in Resources */,
 				6936D7241CEAA40900DFB038 /* save@2x.png in Resources */,
+				6924CDE81D4606CC0068B75E /* haveAdded@2x.png in Resources */,
 				69C2CB3F1CFC7FB900604BB4 /* emptyPlaceholder.png in Resources */,
 				69214E031CE41EA700C18332 /* OMLoginViewController.xib in Resources */,
 				69167B581CE97CC900EFBF40 /* Friends.png in Resources */,
 				694F40601D3E186500491C34 /* location.png in Resources */,
+				6978634F1D4A395C0084F428 /* OMShopWebViewController.xib in Resources */,
 				69FFA4BF1D013B71009001EF /* t.png in Resources */,
 				69214E5E1CE424F700C18332 /* Note.png in Resources */,
 				6936D6F71CE9C2B800DFB038 /* twitter-button@2x.png in Resources */,
 				6936D68D1CE99B4100DFB038 /* moren.jpg in Resources */,
+				698A53691D434C970034B79D /* redU@3x.png in Resources */,
 				694F40121D3C856B00491C34 /* ShopMy@3x.png in Resources */,
 				69214E5C1CE424F700C18332 /* Note-hover@2x.png in Resources */,
 				69214E5A1CE424F700C18332 /* Message@3x.png in Resources */,
@@ -1857,6 +2153,7 @@
 				6936D6CE1CE9B15400DFB038 /* fbbgImg@3x.png in Resources */,
 				694F40171D3C856B00491C34 /* ShopPorduct@2x.png in Resources */,
 				69167AD71CE5A93B00EFBF40 /* OMTaskDetailCell.xib in Resources */,
+				6924CDE51D4606CC0068B75E /* addNew@2x.png in Resources */,
 				697A7BB51CF6C41100283111 /* Images.xcassets in Resources */,
 				69214E4B1CE424F700C18332 /* Home-hover@3x.png in Resources */,
 				69167B4B1CE97AD800EFBF40 /* p@3x.png in Resources */,
@@ -1867,16 +2164,23 @@
 				69663A141D1CE50800D32DF2 /* homeSearch@2x.png in Resources */,
 				697A7BB31CF6C27B00283111 /* logox180.png in Resources */,
 				694F403D1D3E178E00491C34 /* shop-hover@2x.png in Resources */,
+				6924CE371D48F36C0068B75E /* deleteFu.png in Resources */,
 				69663A0B1D1CDAF700D32DF2 /* homeStyleMini@2x.png in Resources */,
+				6924CDDD1D45F7530068B75E /* OMCategoryEditCell.xib in Resources */,
 				697A7BBE1CF6C45E00283111 /* 引导页640x960-1.png in Resources */,
 				69214E511CE424F700C18332 /* Male-User-hover@3x.png in Resources */,
 				6936D7081CE9CC7800DFB038 /* share-it-xq.png in Resources */,
+				698A535F1D434C970034B79D /* blackS@2x.png in Resources */,
 				6936D6B71CE9AB1000DFB038 /* loginbgImg.png in Resources */,
 				6936D73B1CEAB96900DFB038 /* loading_2.png in Resources */,
+				6924CDE71D4606CC0068B75E /* haveAdded.png in Resources */,
 				69FFA4BE1D013B71009001EF /* f@3x.png in Resources */,
 				69214E4A1CE424F700C18332 /* Home-hover@2x.png in Resources */,
+				6924CDC31D45B4790068B75E /* OMCatePerCell.xib in Resources */,
 				697A7BB01CF6C27B00283111 /* logox120.png in Resources */,
+				6924CDF11D475A3A0068B75E /* cart.png in Resources */,
 				694F40131D3C856B00491C34 /* ShopOrders.png in Resources */,
+				698A530A1D41CF2B0034B79D /* OMCategoryInputViewController.xib in Resources */,
 				69214E4C1CE424F700C18332 /* Home.png in Resources */,
 				6936D6B81CE9AB1000DFB038 /* loginbgImg@2x.png in Resources */,
 				69663A091D1CDAF700D32DF2 /* homeStyleLarge@3x.png in Resources */,
@@ -1888,15 +2192,20 @@
 				694F40681D3E186500491C34 /* selected@3x.png in Resources */,
 				69663A221D236AE400D32DF2 /* OMHomeLargeCell.xib in Resources */,
 				69214D221CE2A5DB00C18332 /* Assets.xcassets in Resources */,
+				698A53681D434C970034B79D /* redU@2x.png in Resources */,
 				697A7BB21CF6C27B00283111 /* logox180-2.png in Resources */,
 				69663A321D2551A200D32DF2 /* noShare.png in Resources */,
 				69B9E6E61CE45760006D909E /* OMContactusViewController.xib in Resources */,
+				6924CDCF1D45B4790068B75E /* OMShopProductCell.xib in Resources */,
 				6936D70D1CE9CE3D00DFB038 /* productPlacer.png in Resources */,
 				694F40181D3C856B00491C34 /* ShopPorduct@3x.png in Resources */,
 				69663A181D1CE50800D32DF2 /* search@3x.png in Resources */,
 				694F40221D3CCFB000491C34 /* footer_top.png in Resources */,
 				69B9E6F01CE47130006D909E /* OMBalanceDetailViewController.xib in Resources */,
 				69167B661CE9906F00EFBF40 /* Note@2x.png in Resources */,
+				698A52F21D40D3D50034B79D /* checkedBox.png in Resources */,
+				698A536E1D43549E0034B79D /* OMCategoryUpdateViewController.xib in Resources */,
+				6924CDC71D45B4790068B75E /* OMEditViewController.xib in Resources */,
 				69214E491CE424F700C18332 /* Home-hover.png in Resources */,
 				69C2CB491CFDB54400604BB4 /* omnext@2x.png in Resources */,
 				69214E621CE4260B00C18332 /* bannerIng.jpg in Resources */,
@@ -1904,7 +2213,9 @@
 				69663A161D1CE50800D32DF2 /* search.png in Resources */,
 				6936D6921CE9A04F00DFB038 /* back_btn.png in Resources */,
 				691169361CED955C003E4316 /* Documents.png in Resources */,
+				698A535E1D434C970034B79D /* blackS.png in Resources */,
 				69167AAB1CE4924300EFBF40 /* OMUnAuthorizedAccountCell.xib in Resources */,
+				698A53661D434C970034B79D /* redS@3x.png in Resources */,
 				696639FB1D1C223400D32DF2 /* OMHomeMiniCell.xib in Resources */,
 				69214D201CE2A5DB00C18332 /* Main.storyboard in Resources */,
 				694F401A1D3C856B00491C34 /* ShopSetting@2x.png in Resources */,
@@ -1915,9 +2226,11 @@
 				694F405E1D3E186500491C34 /* dollar@2x.png in Resources */,
 				6936D7401CEAB96900DFB038 /* loading_7.png in Resources */,
 				6911693A1CED955C003E4316 /* submit@2x.png in Resources */,
+				698A52F51D40D3D50034B79D /* unCheckBox@2x.png in Resources */,
 				694F403E1D3E178E00491C34 /* shop-hover@3x.png in Resources */,
 				694F405F1D3E186500491C34 /* dollar@3x.png in Resources */,
 				69D020C31CF29C87008D630E /* t-f@2x.png in Resources */,
+				698A53631D434C970034B79D /* blackU@3x.png in Resources */,
 				6936D71C1CE9D5C800DFB038 /* delete_cell.png in Resources */,
 				6936D6A51CE9A6AB00DFB038 /* Please-login@2x.png in Resources */,
 				69167B321CE93ED700EFBF40 /* OMInputAlertViewController.xib in Resources */,
@@ -1925,9 +2238,11 @@
 				69214E541CE424F700C18332 /* Male-User@3x.png in Resources */,
 				69663A071D1CDAF700D32DF2 /* homeStyleLarge.png in Resources */,
 				69214DBB1CE4153700C18332 /* OMSplashViewController.xib in Resources */,
+				6924CDF51D475A3A0068B75E /* wallet@2x.png in Resources */,
 				69C2CB3D1CFC7F5400604BB4 /* PlaceholderCell.xib in Resources */,
 				694F40671D3E186500491C34 /* selected@2x.png in Resources */,
 				69167B5A1CE97CC900EFBF40 /* Friends@3x.png in Resources */,
+				6924CDE41D4606CC0068B75E /* addNew.png in Resources */,
 				69B9E6EB1CE46298006D909E /* OMPromotionCell.xib in Resources */,
 				6936D7251CEAA40900DFB038 /* save@3x.png in Resources */,
 				69214E5D1CE424F700C18332 /* Note-hover@3x.png in Resources */,
@@ -1938,12 +2253,16 @@
 				697A7BBF1CF6C45E00283111 /* 引导页640x960.png in Resources */,
 				691169241CEC6330003E4316 /* Logout@2x.png in Resources */,
 				69214E4E1CE424F700C18332 /* Home@3x.png in Resources */,
+				6924CDCD1D45B4790068B75E /* OMShopAddProductVC.xib in Resources */,
+				6924CDCB1D45B4790068B75E /* OMProductCategoryViewController.xib in Resources */,
 				6936D6A41CE9A6AB00DFB038 /* Please-login.png in Resources */,
 				6936D71E1CE9D5C800DFB038 /* delete_cell@3x.png in Resources */,
 				6936D6B91CE9AB1000DFB038 /* loginbgImg@3x.png in Resources */,
 				6936D6931CE9A04F00DFB038 /* back_btn@2x.png in Resources */,
+				698A52F31D40D3D50034B79D /* checkedBox@2x.png in Resources */,
 				694F40231D3CCFB000491C34 /* footer_top@2x.png in Resources */,
 				6936D7411CEAB96900DFB038 /* loading_8.png in Resources */,
+				6924CDD71D45F60F0068B75E /* delete@2.png in Resources */,
 				6936D73D1CEAB96900DFB038 /* loading_4.png in Resources */,
 				694F3F8E1D3371A000491C34 /* ReceiverTextNodeBkg.png in Resources */,
 				6936D7061CE9CC7800DFB038 /* Authorize-xq@2x.png in Resources */,
@@ -1951,6 +2270,7 @@
 				69D020C41CF29C87008D630E /* t-f@3x.png in Resources */,
 				694F401B1D3C856B00491C34 /* ShopSetting@3x.png in Resources */,
 				69167B531CE97B1B00EFBF40 /* Apply@2x.png in Resources */,
+				6924CDF31D475A3A0068B75E /* cart@3x.png in Resources */,
 				6936D6CD1CE9B15400DFB038 /* fbbgImg@2x.png in Resources */,
 				690A184C1CF80A83002FA467 /* logox120.png in Resources */,
 				69214E551CE424F700C18332 /* Message-hover.png in Resources */,
@@ -2057,31 +2377,40 @@
 				694F40351D3DB65700491C34 /* LrdOutputView.m in Sources */,
 				69C2CB371CFC5E5400604BB4 /* OMCompletedViewController.m in Sources */,
 				69214D171CE2A5DB00C18332 /* main.m in Sources */,
+				6924CDCE1D45B4790068B75E /* OMShopProductCell.m in Sources */,
 				69B9E6E51CE45760006D909E /* OMContactusViewController.m in Sources */,
 				694F3FF11D39D7A200491C34 /* OMShopSettingsViewController.m in Sources */,
 				69D020B41CF24FF1008D630E /* OMSelectItemCell.m in Sources */,
 				696639FA1D1C223400D32DF2 /* OMHomeMiniCell.m in Sources */,
+				698A52E31D40AAC00034B79D /* OMProductAttributeModel.m in Sources */,
 				69167AAA1CE4924300EFBF40 /* OMUnAuthorizedAccountCell.m in Sources */,
-				694F402B1D3CE98000491C34 /* OMShopProductCell.m in Sources */,
+				698A53711D43751A0034B79D /* OMProductDetail.m in Sources */,
 				69DC81F21D2A976800672361 /* OMFriendListModel.m in Sources */,
 				69B9E6EF1CE47130006D909E /* OMBalanceDetailViewController.m in Sources */,
+				6978634E1D4A395C0084F428 /* OMShopWebViewController.m in Sources */,
 				69DC81F81D2A9F6100672361 /* OMMessageDetailVC.m in Sources */,
 				694F3FF51D39D7B300491C34 /* OMShopOrdersViewController.m in Sources */,
+				6924CDDC1D45F7530068B75E /* OMCategoryEditCell.m in Sources */,
 				69167AA01CE4904700EFBF40 /* OMMySocialAccountViewController.m in Sources */,
 				69214D701CE3327000C18332 /* GTMBase64.m in Sources */,
 				69663A2B1D24E45200D32DF2 /* OMTaskNormalCell.m in Sources */,
 				694F402F1D3CF17900491C34 /* OMProductModel.m in Sources */,
 				694F3FFD1D39E74600491C34 /* OMProductCell.m in Sources */,
+				6924CDD01D45B4790068B75E /* OMShopProductViewController.m in Sources */,
 				69167B311CE93ED700EFBF40 /* OMInputAlertViewController.m in Sources */,
 				69214E021CE41EA700C18332 /* OMLoginViewController.m in Sources */,
+				6924CDBE1D45B4790068B75E /* OMAddProductCell.m in Sources */,
 				69663A211D236AE400D32DF2 /* OMHomeLargeCell.m in Sources */,
 				69214D7C1CE3677F00C18332 /* BaseViewController.m in Sources */,
 				69214DAB1CE36E3D00C18332 /* OMMessageViewController.m in Sources */,
 				69214E071CE41EF100C18332 /* OMVisitorViewController.m in Sources */,
 				69D020C71CF2A087008D630E /* OMAccountDetail.m in Sources */,
 				69214D861CE3683300C18332 /* OMWebViewController.m in Sources */,
+				698A53041D41B0040034B79D /* OMProfitAlertViewController.m in Sources */,
 				6911692E1CED9052003E4316 /* OMApplyAlertViewController.m in Sources */,
+				6924CDCA1D45B4790068B75E /* OMProductCategoryViewController.m in Sources */,
 				69167AD61CE5A93B00EFBF40 /* OMTaskDetailCell.m in Sources */,
+				698A53511D4310720034B79D /* OMOrderDetail.m in Sources */,
 				69B9E6EA1CE46298006D909E /* OMPromotionCell.m in Sources */,
 				69214DB01CE36E4C00C18332 /* OMMyCartViewController.m in Sources */,
 				69214DBA1CE4153700C18332 /* OMSplashViewController.m in Sources */,
@@ -2089,23 +2418,30 @@
 				69D020AF1CF24390008D630E /* OMSeparatorCell.m in Sources */,
 				694F3F9A1D35309400491C34 /* OMSocketManager.m in Sources */,
 				69214DA61CE36E2B00C18332 /* OMHomeViewController.m in Sources */,
+				6924CDCC1D45B4790068B75E /* OMShopAddProductVC.m in Sources */,
 				694F40321D3CF9E200491C34 /* OMCategoryModel.m in Sources */,
 				6936D7491CEBFF0300DFB038 /* OMHomeTaskDetialModel.m in Sources */,
+				6924CDC41D45B4790068B75E /* OMCateSearchViewController.m in Sources */,
 				69663A281D24E44000D32DF2 /* OMTaskFinishedCell.m in Sources */,
 				69214E0C1CE41F4700C18332 /* OMSearchViewController.m in Sources */,
+				6924CDC01D45B4790068B75E /* OMCategoryProductCell.m in Sources */,
+				6924CDC61D45B4790068B75E /* OMEditViewController.m in Sources */,
 				69B9E6F41CE4761E006D909E /* OMBalanceCell.m in Sources */,
 				69167ACD1CE5679000EFBF40 /* OMHomeTaskModel.m in Sources */,
-				694F3FF91D39D90600491C34 /* OMShopProductViewController.m in Sources */,
 				69D020B81CF29053008D630E /* OMSNSAccount.m in Sources */,
+				6924CDC21D45B4790068B75E /* OMCatePerCell.m in Sources */,
 				694F3F971D337B9300491C34 /* UINavigationItem+Loading.m in Sources */,
 				69167AAF1CE49D7D00EFBF40 /* OMAuthorityDetailViewController.m in Sources */,
+				69B2CD551D43AFE0007BC8B7 /* OMOrderDetailViewController.m in Sources */,
 				694F3FED1D390F3100491C34 /* OMShopViewController.m in Sources */,
-				694F40271D3CD7C600491C34 /* OMShopAddProductVC.m in Sources */,
 				69663A251D23AA7B00D32DF2 /* OMTaskAcceptCell.m in Sources */,
 				69DC81F51D2A977500672361 /* OMChatModel.m in Sources */,
 				69167AA51CE4922C00EFBF40 /* OMAuthorizedAccountCell.m in Sources */,
+				6924CDC81D45B4790068B75E /* OMProductAtributeCell.m in Sources */,
 				69B9E6FE1CE480F2006D909E /* OMAccountDetailCell.m in Sources */,
+				698A536D1D43549E0034B79D /* OMCategoryUpdateViewController.m in Sources */,
 				69214DB51CE36E5E00C18332 /* OMAccountsViewController.m in Sources */,
+				698A53091D41CF2B0034B79D /* OMCategoryInputViewController.m in Sources */,
 				69B9E6F91CE47ECD006D909E /* OMAcountDetailViewController.m in Sources */,
 				69214D7F1CE367BC00C18332 /* OMCustomNavigation.m in Sources */,
 				69214D731CE333BE00C18332 /* NSString+MD5HexDigest.m in Sources */,
@@ -2255,7 +2591,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tian Xia (N9WXGWCWV8)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Tian Xia (N9WXGWCWV8)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2279,8 +2615,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Tian Xia (4LW94449SP)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tian Xia (N9WXGWCWV8)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Tian Xia (N9WXGWCWV8)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2293,7 +2629,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mabang.OurMall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "561af122-8ff7-4435-823e-0f7ba45ade81";
 			};
 			name = Release;
 		};

@@ -13,8 +13,12 @@
 #import "OMShopOrdersViewController.h"
 #import "OMShopSettingsViewController.h"
 
+#import "OMShopWebViewController.h"
+
 
 @interface OMShopViewController ()
+
+@property(nonatomic, strong) MBProgressHUD *hud;
 
 @end
 
@@ -37,6 +41,29 @@
     [self.orderImg addGestureRecognizer:orderTap];
     [self.settingsImg addGestureRecognizer:settingsTap];
     
+    // laoding animation
+    self.hud = [[MBProgressHUD alloc] init];
+    [self.view addSubview:self.hud];
+    [self.hud show:YES];
+    
+    [self loadData];
+}
+
+- (void)loadData{
+    
+    // interface for revenue label value
+    
+    NSDictionary *paramDic = @{@"id" : [SETTINGs objectForKey:OM_USER_ID],
+                               };
+    [OMCustomTool AFGetDateWithMethodPost_ParametersDic:paramDic API:API_S_DETAIL_INFORMATION dateBlock:^(id dateBlock) {
+        
+        // obtain parameters
+        NSLog(@"shop informations : %@", dateBlock);
+        NSString *revenueValue = dateBlock[@"Data"][@"MemberInfo"][@"thirtyDayIncome"];
+        self.revenueLabel.text = [self OMString:revenueValue];
+    }];
+    
+    [self.hud hide:YES];
 }
 
 - (void)jumpToShopPage:(UITapGestureRecognizer *)tap{
@@ -50,9 +77,10 @@
         NSLog(@"shop informations : %@", dateBlock);
         NSString *shopUrl = dateBlock[@"Data"][@"MemberInfo"][@"shopDetail"][@"shopUrl"];
         
-        OMWebViewController *shopVC = [[OMWebViewController alloc] init];
-        [self.navigationController pushViewController:shopVC animated:YES];
-        shopVC.URLString = shopUrl;
+        
+        OMShopWebViewController *shopWebVC = [[OMShopWebViewController alloc] init];
+        shopWebVC.URLString = shopUrl;
+        [self.navigationController pushViewController:shopWebVC animated:YES];
     }];
     
 }

@@ -269,12 +269,6 @@
     
     [self.hud show:YES];
     
-    [self deleteAllUserInfoLocal];
-    [self clearAllLoginInformations];
-    
-    // send logout notification to global
-    [NOTIFICATION_SETTING postNotificationName:OMUSER_STATUS_LOGOUT object:nil];
-    
     NSDictionary *paramDic = @{@"memberUid" : [SETTINGs objectForKey:OM_USER_UID],
                                @"jpushCode" : [JPUSHService registrationID]
                                };
@@ -285,6 +279,14 @@
         
         [self.hud hide:YES];
     }];
+    
+    
+    [self deleteAllUserInfoLocal];
+    [self clearAllLoginInformations];
+    
+    // send logout notification to global
+    [NOTIFICATION_SETTING postNotificationName:OMUSER_STATUS_LOGOUT object:nil];
+    
     
 }
 
@@ -308,6 +310,12 @@
     [SETTINGs removeObjectForKey:OM_USER_NAME];
     [SETTINGs synchronize];
     [SETTINGs removeObjectForKey:OM_USER_LOGINKEY];
+    [SETTINGs synchronize];
+    [SETTINGs removeObjectForKey:OM_USER_UID];
+    [SETTINGs synchronize];
+    [SETTINGs removeObjectForKey:OM_USER_ICON];
+    [SETTINGs synchronize];
+    [SETTINGs removeObjectForKey:OM_USER_SHOP_STATUS];
     [SETTINGs synchronize];
 }
 

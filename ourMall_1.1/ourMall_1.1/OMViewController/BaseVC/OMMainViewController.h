@@ -9,9 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <SRWebSocket.h>
 
-@interface OMMainViewController : UITabBarController<SRWebSocketDelegate>
-{
-    SRWebSocket *myWebSocket;
-}
+@interface OMMainViewController : UITabBarController
+
 
 @end

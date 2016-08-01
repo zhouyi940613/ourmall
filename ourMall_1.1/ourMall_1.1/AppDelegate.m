@@ -12,9 +12,11 @@
 
 #import "OMDefined.h"
 #import "OMCustomTool.h"
+#import "OMCustomNavigation.h"
 
 #import "OMSplashViewController.h"
 #import "OMMainViewController.h"
+#import "OMMessageViewController.h"
 
 // Facebook
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
@@ -95,11 +97,6 @@
     // AppsFlyer
     [AppsFlyerTracker sharedTracker].appsFlyerDevKey = APPSFLYER_DEV_KEY;
     [AppsFlyerTracker sharedTracker].appleAppID = APPSFLYER_App_ID;
-
-    // save user's device id in local file
-    NSString *adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-    [SETTINGs setValue:adId forKey:OMAF_DEVICE_ID];
-    [SETTINGs synchronize];
     
     
     // JPush Settings
@@ -147,8 +144,35 @@
     myWebSocket.delegate = self;
     [myWebSocket open];
     
+    // unRead count
+    [NOTIFICATION_SETTING addObserver:self selector:@selector(sendForUnReadCount) name:OMWEBSOCKET_UNREADCOUNTREQUEST object:nil];
+    // session list
+    [NOTIFICATION_SETTING addObserver:self selector:@selector(sendForGetSessionList) name:OMWEBSOCKET_SESSIONLISTREQUEST object:nil];
+    // session detail
+    [NOTIFICATION_SETTING addObserver:self selector:@selector(sendForGetSessionDetail:) name:OMWEBSOCKET_SESSIONDETAILREQUEST object:nil];
+    // send message
+    [NOTIFICATION_SETTING addObserver:self selector:@selector(sendMessage:) name:OMWEBSOCKET_SENDMESSAGE object:nil];
+    
+    [NOTIFICATION_SETTING addObserver:self selector:@selector(socketOpenAction) name:OMWEBSOCKET_OPEN object:nil];
+    
+    [NOTIFICATION_SETTING addObserver:self selector:@selector(socketCloseAction) name:OMWEBSOCKET_CLOSE object:nil];
+    
+    [NOTIFICATION_SETTING addObserver:self selector:@selector(socketOpenAction) name:OMAPP_ENTER_FOREGROUND object:nil];
+    
+   
+    
+    // jump to specific page
+//    if (launchOptions) {
+//        NSDictionary * remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+//        if (remoteNotification) {
+//            NSLog(@"推送消息==== %@",remoteNotification);
+//            [self goToMssageViewControllerWith:remoteNotification];
+//        }
+//    }
+    
     return YES;
 }
+
 
 
 - (void)showMainViewController{
@@ -169,14 +193,20 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
-    // close socket connection
-//    myWebSocket.delegate = nil;
-//    [myWebSocket close];
-    
+    // socket settings
+    myWebSocket.delegate = nil;
+    [myWebSocket close];
+    [SETTINGs setValue:@"off" forKey:OMWEBSOCKT_STATUS];
+    [SETTINGs synchronize];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
+    [NOTIFICATION_SETTING postNotificationName:OMAPP_ENTER_FOREGROUND object:nil];
+    
+    // clear bage
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -186,13 +216,18 @@
     // Track Installs, updates & sessions(app opens) (You must include this API to enable tracking)
     [[AppsFlyerTracker sharedTracker] trackAppLaunch];
     
+    // clear bage
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    [JPUSHService resetBadge];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:
     
     myWebSocket.delegate = nil;
     [myWebSocket close];
+    [SETTINGs setValue:@"off" forKey:OMWEBSOCKT_STATUS];
+    [SETTINGs synchronize];
     
 }
 
@@ -212,7 +247,7 @@
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
-    /// Required - 注册 DeviceToken
+    /// Required - register DeviceToken
     [JPUSHService registerDeviceToken:deviceToken];
     
 }
@@ -224,12 +259,30 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
 }
 
+#pragma mark - Jump
+- (void)goToMssageViewControllerWith:(NSDictionary*)msgDic{
+
+    NSUserDefaults*pushJudge = [NSUserDefaults standardUserDefaults];
+    [pushJudge setObject:@"push"forKey:@"push"];
+    [pushJudge synchronize];
+    NSString * userId = [msgDic objectForKey:@"memberUid"];
+    
+    if ([userId isEqualToString:[SETTINGs objectForKey:OM_USER_UID]]) {
+        
+        OMMessageViewController * VC = [[OMMessageViewController alloc]init];
+        OMCustomNavigation * Nav = [[OMCustomNavigation alloc]initWithRootViewController:VC];
+        [self.window.rootViewController presentViewController:Nav animated:YES completion:nil];
+        
+    }
+}
+
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     
     // IOS 7 Support Required
     [JPUSHService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
     
+//    [self goToMssageViewControllerWith:userInfo];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -237,12 +290,37 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
 }
 
+
 #pragma mark - About WebSocket
-- (void)webSocketDidOpen:(SRWebSocket *)webSocket{
+- (void)socketOpenAction{
     
+    myWebSocket.delegate = nil;
+    [myWebSocket close];
     [SETTINGs setValue:@"off" forKey:OMWEBSOCKT_STATUS];
     [SETTINGs synchronize];
+    
+    myWebSocket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:WEBSOCKET_SERVER_URL]]];
+    myWebSocket.delegate = self;
+    [myWebSocket open];
+}
+
+- (void)socketCloseAction{
+    
+    [myWebSocket close];
+    [SETTINGs setValue:@"off" forKey:OMWEBSOCKT_STATUS];
+    [SETTINGs synchronize];
+}
+
+- (void)webSocketDidOpen:(SRWebSocket *)webSocket{
+    
+    [SETTINGs setValue:@"on" forKey:OMWEBSOCKT_STATUS];
+    [SETTINGs synchronize];
+
     NSLog(@"WebSocket Connection Succeed!");
+    
+    // connencted succeed notice
+    [NOTIFICATION_SETTING postNotificationName:OMWEBSOCKET_CONNECTED object:nil];
+
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error{
@@ -253,6 +331,150 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message{
 
+    NSString *str = [NSString stringWithFormat:@"%@", message];
+    NSDictionary *dicc = [self dictionaryWithJsonString:str];
+    
+     NSLog(@"WebSocket Received Informations : %@", dicc);
+    
+    if ([dicc[@"ac"] isEqualToString:@"ping"]) {
+    }
+    else if ([dicc[@"ac"] isEqualToString:@"init"])
+    {
+        // classisy
+        if (![OMCustomTool isNullObject:dicc[@"getUnRead"]] && [OMCustomTool isNullObject:dicc[@"getChatContent"]]) {
+            
+            // unRead count and session list
+                // unRead count
+                NSString *unReadCountStr = dicc[@"getUnRead"][@"cnt"];
+                [NOTIFICATION_SETTING postNotificationName:OMWEBSOCKET_UNREADCOUNT object:nil userInfo:@{@"unReadCnt" : unReadCountStr}];
+                
+                // session list
+                NSArray *sessionListArr = [NSArray array];
+                sessionListArr = dicc[@"getUnRead"][@"subjects"];
+                [NOTIFICATION_SETTING postNotificationName:OMWEBSOCKET_SESSIONLIST object:nil userInfo:@{@"sessionList" : sessionListArr, @"status" : @"init"}];
+            
+        }
+        else if (![OMCustomTool isNullObject:dicc[@"getChatContent"]] && [OMCustomTool isNullObject:dicc[@"getUnRead"]])
+        {
+           
+            NSString *flag = [NSString stringWithFormat:@"%@", dicc[@"getChatContent"][@"isFirst"]];
+            
+            if ([flag integerValue] == 1) {
+                // initailize list
+                NSArray *sessionArr = [NSArray array];
+                sessionArr = dicc[@"getChatContent"][@"contents"];
+                [NOTIFICATION_SETTING postNotificationName:OMWEBSOCKET_SESSIONDETAIL object:nil userInfo:@{@"chatList" : sessionArr}];
+            }
+            else{
+                // = 0 new data
+            }
+        }
+        else if (![OMCustomTool isNullObject:dicc[@"getChatContent"]] && ![OMCustomTool isNullObject:dicc[@"getUnRead"]])
+        {
+            // receive new message return data
+            NSString *flag = [NSString stringWithFormat:@"%@", dicc[@"getChatContent"][@"isFirst"]];
+            
+            // new talk
+            if ([flag integerValue] == 0) {
+                // new item
+                NSArray *newArr = [NSArray array];
+                newArr = dicc[@"getChatContent"][@"contents"];
+                [NOTIFICATION_SETTING postNotificationName:OMWEBSOCKET_SESSIONDETAIL_NEW object:nil userInfo:@{@"newChat" : newArr}];
+                
+                // update style
+                
+                // unRead count and session list
+                // unRead count
+                NSString *unReadCountStr = dicc[@"getUnRead"][@"cnt"];
+                [NOTIFICATION_SETTING postNotificationName:OMWEBSOCKET_UNREADCOUNT object:nil userInfo:@{@"unReadCnt" : unReadCountStr}];
+                
+                // session list
+                NSArray *sessionListArr = [NSArray array];
+                sessionListArr = dicc[@"getUnRead"][@"subjects"];
+                [NOTIFICATION_SETTING postNotificationName:OMWEBSOCKET_SESSIONLIST object:nil userInfo:@{@"sessionList" : sessionListArr, @"status" : @"new"}];
+            }
+            else{
+                // = 1 initialize list
+            }
+        }
+        else{
+            NSLog(@"Return Data Error");
+        }
+    }
+    else if ([dicc[@"ac"] isEqualToString:@"logout"])
+    {
+        NSLog(@"logout message");
+        
+        [OMCustomTool OMRequestForNewLoginKey];
+        // 重新请求数据（重新send）
+        // 备注:待定
+    }
+    else{
+        NSLog(@"other message");
+    }
+
+}
+
+
+#pragma mark - Send Method With Notification
+- (void)sendForUnReadCount{
+    
+    if ([[SETTINGs objectForKey:OMWEBSOCKT_STATUS] isEqualToString:@"on"]) {
+        [myWebSocket send:[OMCustomTool OMReturnParametersWithDicForSessionList]];
+    }
+    else{
+        [self performSelector:@selector(sendForUnReadCount) withObject:nil afterDelay:1.5];
+    }
+}
+
+- (void)sendForGetSessionList{
+    
+    if ([[SETTINGs objectForKey:OMWEBSOCKT_STATUS] isEqualToString:@"on"]) {
+        [myWebSocket send:[OMCustomTool OMReturnParametersWithDicForSessionList]];
+    }
+    else{
+        [self performSelector:@selector(sendForGetSessionList) withObject:nil afterDelay:1.5];
+    }
+}
+
+- (void)sendForGetSessionDetail:(NSNotification *)notice{
+    
+    if ([[SETTINGs objectForKey:OMWEBSOCKT_STATUS] isEqualToString:@"on"]) {
+        
+        [myWebSocket send:notice.userInfo[@"sessionDetail"]];
+    }
+    else{
+        [self performSelector:@selector(sendForGetSessionDetail:) withObject:nil afterDelay:1.5];
+    }
+}
+
+- (void)sendMessage:(NSNotification *)notice{
+    
+    if ([[SETTINGs objectForKey:OMWEBSOCKT_STATUS] isEqualToString:@"on"]) {
+        
+        [myWebSocket send:notice.userInfo[@"messageContent"]];
+    }
+    else{
+        [self performSelector:@selector(sendMessage:) withObject:nil afterDelay:1.5];
+    }
+}
+
+
+- (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString{
+    
+    if (jsonString == nil) {
+        return nil;
+    }
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&error];
+    if(error) {
+        NSLog(@"Json resolve failed with error : %@",error);
+        return nil;
+    }
+    return dic;
 }
 
 @end

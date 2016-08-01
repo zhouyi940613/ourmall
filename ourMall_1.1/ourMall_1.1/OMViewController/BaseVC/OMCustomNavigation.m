@@ -66,6 +66,7 @@
 - (void)buttonBackClicked:(UIButton *)btn{
     
     [self popViewControllerAnimated:YES];
+    [NOTIFICATION_SETTING postNotificationName:OMBACK_BUTTON_CLICKED object:nil];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -122,7 +122,7 @@
     OMPromotionModel *model = [self.taskArray objectAtIndex:indexPath.row];
     
     [OMCustomTool SDSetImageView:cell.productImg withURLString:model.taskImgUrl
-          andPlacehoderImageName:USER_ICONIMG];
+          andPlacehoderImageName:OMPORDUCT_ICONIMG];
     cell.titleLabel.text = model.taskName;
     cell.priceLabel.text = [self OMString:model.applyCash];
     

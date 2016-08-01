@@ -13,13 +13,11 @@
 #pragma mark - 编码
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     
-    [aCoder encodeObject:self.name forKey:@"name"];
     [aCoder encodeObject:self.lastMessage forKey:@"lastMessage"];
     [aCoder encodeObject:self.lastModifyTime forKey:@"lastModifyTime"];
     [aCoder encodeObject:self.messageType forKey:@"messageType"];
     [aCoder encodeObject:self.myUnReadCnt forKey:@"myUnReadCnt"];
     [aCoder encodeObject:self.otherId forKey:@"otherId"];
-    [aCoder encodeObject:self.imgUrls forKey:@"imgUrls"];
     [aCoder encodeObject:self.sellerId forKey:@"sellerId"];
     [aCoder encodeObject:self.sponsorName forKey:@"sponsorName"];
     [aCoder encodeObject:self.subjectPid forKey:@"subjectPid"];
@@ -33,13 +31,11 @@
     
     if (self) {
         
-        self.name = [aDecoder decodeObjectForKey:@"name"];
         self.lastMessage = [aDecoder decodeObjectForKey:@"lastMessage"];
         self.lastModifyTime = [aDecoder decodeObjectForKey:@"lastModifyTime"];
         self.messageType = [aDecoder decodeObjectForKey:@"messageType"];
         self.myUnReadCnt = [aDecoder decodeObjectForKey:@"myUnReadCnt"];
         self.otherId = [aDecoder decodeObjectForKey:@"otherId"];
-        self.imgUrls = [aDecoder decodeObjectForKey:@"imgUrls"];
         self.sellerId = [aDecoder decodeObjectForKey:@"sellerId"];
         self.sponsorName = [aDecoder decodeObjectForKey:@"sponsorName"];
         self.subjectPid = [aDecoder decodeObjectForKey:@"subjectPid"];
