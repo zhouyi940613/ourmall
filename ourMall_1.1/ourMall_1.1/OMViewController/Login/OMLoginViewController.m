@@ -26,6 +26,7 @@
     [self.hud hide:YES];
 }
 
+
 #pragma mark - Back Button Clicked Action
 - (IBAction)backButtonClickedAction:(id)sender {
     
@@ -38,7 +39,7 @@
 - (IBAction)FacebookLoginButtonClickedAction:(id)sender {
     // statistics
     
-//    [self.hud show:YES];
+    [self.hud show:YES];
     
     [[AppsFlyerTracker sharedTracker] trackEvent:@"LOGIN_FB" withValue:[NSString stringWithFormat:@"%@", [SETTINGs objectForKey:OM_USER_ID]]];
     
@@ -51,7 +52,7 @@
 - (IBAction)TwitterLoginButtonClickedAction:(id)sender {
     // statistics
     
-//    [self.hud show:YES];
+    [self.hud show:YES];
     
     [[AppsFlyerTracker sharedTracker] trackEvent:@"LOGIN_TW" withValue:[NSString stringWithFormat:@"%@", [SETTINGs objectForKey:OM_USER_ID]]];
     

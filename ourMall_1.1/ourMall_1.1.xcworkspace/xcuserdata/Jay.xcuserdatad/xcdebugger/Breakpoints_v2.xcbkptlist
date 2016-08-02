@@ -132,12 +132,12 @@
                   moduleName = "ourMall_1.1"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Jay/Desktop/OurMallWorkplace_OnLine/ourMall_1.1/ourMall_1.1/OMViewController/MyShop/OMProductCategoryViewController.m"
-                  timestampString = "491715270.759734"
+                  timestampString = "491728260.373991"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "158"
                   endingLineNumber = "158"
-                  offsetFromSymbolStart = "360">
+                  offsetFromSymbolStart = "340">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -147,12 +147,12 @@
                   moduleName = "ourMall_1.1"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Jay/Desktop/OurMallWorkplace_OnLine/ourMall_1.1/ourMall_1.1/OMViewController/MyShop/OMProductCategoryViewController.m"
-                  timestampString = "491715270.760216"
+                  timestampString = "491728260.374379"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "158"
                   endingLineNumber = "158"
-                  offsetFromSymbolStart = "368">
+                  offsetFromSymbolStart = "356">
                </Location>
             </Locations>
          </BreakpointContent>
